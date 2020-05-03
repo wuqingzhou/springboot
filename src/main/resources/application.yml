@@ -1,3 +1,14 @@
-# 建议使用application.yml配置文件，而不是application.properties配置文件。原因：前者树状结构一目了然，解决了中文编码问题spring
-profiles:
-  active: dev
+# 建议使用application.yml配置文件，而不是application.properties配置文件。原因：前者树状结构一目了然，解决了中文编码问题
+spring:
+  profiles:
+    active: dev
+
+server:
+  servlet:
+    context-path: /sb
+
+# 自定义属性。注：自定义属性建议使用@ConfigurationProperties注解，而不是@Value
+app-config:
+  id: myid
+  name: springboot练习
+  desc: springboot官方文档部分信息解读

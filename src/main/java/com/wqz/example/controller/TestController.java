@@ -1,5 +1,6 @@
 package com.wqz.example.controller;
 
+import com.wqz.example.config.AppConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,5 +48,12 @@ public class TestController {
             System.out.println("cusp2.cusProperty5List.get(" + i + ")=" + cusp2_cusProperty5List.get(i));
         }
         cusp2_cusProperty6Map.forEach((k, v) -> System.out.println("k = " + k + "     v = " + v));
+    }
+
+    @GetMapping("/cusProperty2")
+    public void cusProperty2() {
+        System.out.println(AppConfig.getName());
+        System.out.println(AppConfig.getDesc());
+        System.out.println(AppConfig.getId());
     }
 }
