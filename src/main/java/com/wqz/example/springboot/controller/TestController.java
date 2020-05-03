@@ -1,6 +1,6 @@
-package com.wqz.example.controller;
+package com.wqz.example.springboot.controller;
 
-import com.wqz.example.config.AppConfig;
+import com.wqz.example.springboot.config.AppConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

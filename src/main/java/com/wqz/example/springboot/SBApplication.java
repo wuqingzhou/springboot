@@ -1,4 +1,4 @@
-package com.wqz.example;
+package com.wqz.example.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
