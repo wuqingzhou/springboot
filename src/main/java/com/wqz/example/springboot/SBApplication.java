@@ -2,6 +2,7 @@ package com.wqz.example.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @EnableAutoConfiguration 作用：开启自动配置
@@ -17,7 +18,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @SpringBootApplication 作用：整合@EnableAutoConfiguration、@ComponentScan注解
  * 修饰范围：类
  */
+
+/**
+ * @EnableSwagger2 作用：开启swagger相关注解扫描
+ */
 @SpringBootApplication
+@EnableSwagger2
 public class SBApplication {
     public static void main(String[] args) {
         SpringApplication.run(SBApplication.class, args);
