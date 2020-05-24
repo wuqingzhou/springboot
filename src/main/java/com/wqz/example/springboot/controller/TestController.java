@@ -13,22 +13,22 @@ import java.util.Map;
 @RequestMapping("/test")
 public class TestController {
 
-    @Value("${cusp2.cusProperty1}")
+    @Value("${cusp2.cusProperty1:自定义属性default1}")
     private String cusp2_cusProperty1;
 
-    @Value("${cusp2.cusProperty2_date}")
+    @Value("${cusp2.cusProperty2_date:2020/05/04}")
     private String cusp2_cusProperty2Date;
 
-    @Value("${cusp2.cusProperty3.name}")
+    @Value("${cusp2.cusProperty3.name:自定义属性default3}")
     private String cusp2_cusProperty3Name;
 
-    @Value("${cusp2.cusProperty4_arr}")
+    @Value("${cusp2.cusProperty4_arr:d_aa,d_bb,d_cc}")
     private String[] cusp2_cusProperty4Arr;
 
-    @Value("${cusp2.cusProperty5_list}")
+    @Value("${cusp2.cusProperty5_list:d_dd,d_ee,d_ff}")
     private List<String> cusp2_cusProperty5List;
 
-    @Value("#{${cusp2.cusProperty6_map}}")
+    @Value("#{${cusp2.cusProperty6_map:{\"a\":\"d_a1\",\"b\":\"d_b1\",\"c\":\"d_c1\"}}}")
     private Map<String, String> cusp2_cusProperty6Map;
 
     @GetMapping("/sayHello")
