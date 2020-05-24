@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * app-config 配置信息
  * 注：变量全部定义成静态。get方法是静态方法，set方法是普通方法
+ * 注：@ConfigurationProperties只会调用非静态的set方法
  */
 @Component
 @ConfigurationProperties(prefix = "app-config")
