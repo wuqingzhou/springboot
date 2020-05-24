@@ -15,3 +15,10 @@ app-config:
   id: myid
   name: springboot练习
   desc: springboot官方文档部分信息解读
+
+# nats配置
+nats:
+  enable: false
+  host: localhost
+  port: 4222
+  defaultTopic: myNatsTopic
