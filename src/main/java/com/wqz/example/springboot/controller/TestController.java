@@ -1,13 +1,18 @@
 package com.wqz.example.springboot.controller;
 
 import com.wqz.example.springboot.config.AppConfig;
+import com.wqz.example.springboot.mapper.TbUserMapper;
+import com.wqz.example.springboot.model.TbUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/test")
@@ -36,6 +41,9 @@ public class TestController {
         return "hello !";
     }
 
+    @Autowired
+    TbUserMapper userMapper;
+
     @GetMapping("/cusProperty")
     public void cusProperty() {
         System.out.println("cusp2.cusProperty1=" + cusp2_cusProperty1);
@@ -55,5 +63,25 @@ public class TestController {
         System.out.println(AppConfig.getName());
         System.out.println(AppConfig.getDesc());
         System.out.println(AppConfig.getId());
+    }
+
+    @GetMapping("/test222")
+    public  List<TbUser> test222222() {
+        List<TbUser> userList = userMapper.selectAll();
+        List<TbUser> userList2 = userMapper.getListTest();
+        List<Map<String, String>> userList3 = userMapper.getListTest2();
+        return userList2;
+    }
+
+    @GetMapping("/测试插入数据")
+    public  List<TbUser> testInsert1(@RequestParam String txt) {
+        TbUser tbUser = new TbUser();
+        tbUser.setId(UUID.randomUUID().toString());
+        tbUser.setName(txt);
+        tbUser.setOldName(txt);
+        userMapper.insertSelective(tbUser);
+
+        List<TbUser> userList = userMapper.selectAll();
+        return userList;
     }
 }

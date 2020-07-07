@@ -5,6 +5,25 @@ spring:
   redis:
     host: localhost
     port: 6379
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/orcl
+    username: wqz
+    password: wqz
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wqz.example.springboot.model
+  configuration:
+    jdbc-type-for-null: null
+    map-underscore-to-camel-case: true
+
+#mapper:
+#  mappers: com.wqz.example.springboot.utils.mapper.BaseSinglePkTableMapper
+#  identity: oracle
+#  before: true
+#  not-empty: false
 
 server:
   servlet:
@@ -22,3 +41,12 @@ nats:
   host: localhost
   port: 4222
   defaultTopic: myNatsTopic
+
+# 日志
+debug: true
+logging:
+  level:
+    com:
+      wqz:
+        example:
+          springboot: debug

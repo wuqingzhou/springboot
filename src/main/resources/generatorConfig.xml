@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="oracle" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!-- 生成的Java文件的编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 自动识别数据库关键字，默认false -->
+        <property name="autoDelimitKeywords" value="true" />
+        <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错 -->
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!-- 指定自定义的通用mapper -->
+            <!--<property name="mappers" value="wqz.model.sbmm.busproject.utils.mapper.BaseViewMapper"/>-->
+            <!--<property name="mappers" value="wqz.model.sbmm.busproject.utils.mapper.BaseCompositeOrNullPkTableMapper"/>-->
+            <property name="mappers" value="wqz.model.sbmm.busproject.utils.mapper.BaseSinglePkTableMapper"/>
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接配置 -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        userId="wqz"
+                        password="wqz">
+        </jdbcConnection>
+
+        <!-- 其中targetPackage表示生成的文件所在的包，即：文件第一行中的包路径 -->
+        <!-- 其中targetProject表示在哪个路径下生成targetPackage包。注意：最终文件的全路径是targetProject + targetPackage -->
+        <!-- 注意：targetProject路径一定要事先建立好。假设targetProject="src/test/java。那么就一定要有"src/test/java"这个文件夹 -->
+        <!--
+            例如。如果targetPackage="com.teligen.licensemgr.entity" targetProject="src/test/java"
+            那么生成的实体文件（假设名为User.java）的路径就为：src/test/java/com/teligen/licensemgr/entity/User.java
+        -->
+        <javaModelGenerator targetPackage="com.wqz.example.springboot.model" targetProject="src/test/java"/>
+
+        <sqlMapGenerator targetPackage="com.wqz.example.springboot.mapper" targetProject="src/test/java"/>
+
+        <javaClientGenerator targetPackage="com.wqz.example.springboot.mapper" targetProject="src/test/java"
+                             type="XMLMAPPER"/>
+
+        <!-- tableName="%"的话会对所有表进行操作，tableName="tb_license"的话只会对tb_license表进行操作 -->
+        <table tableName="tb_user">
+            <!-- mysql 配置 -->
+            <!-- 如果使用了通用mapper来生成代码，则表中必须要有id这个自增长的int字段，这个配置不能少 -->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <!-- oracle 配置-->
+            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+        </table>
+    </context>
+</generatorConfiguration>
