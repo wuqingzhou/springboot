@@ -5,7 +5,6 @@ import io.nats.client.Connection;
 import io.nats.client.Nats;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 /**
@@ -16,13 +15,17 @@ public class AppUtil {
     public static Connection natsConnection = null;    // nats连接
 
     /**
-     * 如果开启了nats功能，则创建nats连接
+     * 获取默认的nats连接
      */
-    @PostConstruct
-    public void initNatsConnection() throws IOException, InterruptedException {
-        if (NatsConfig.getEnable()) {
+    public static Connection getNatsConnection() throws IOException, InterruptedException {
+        if (!NatsConfig.getEnable()) {
+            return null;
+        }
+
+        if (null == natsConnection) {
             String url = "nats://" + NatsConfig.getHost() + ":" + NatsConfig.getPort();
             natsConnection = Nats.connect(url);
         }
+        return natsConnection;
     }
 }

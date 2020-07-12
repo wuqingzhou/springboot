@@ -37,16 +37,16 @@ app-config:
 
 # nats配置
 nats:
-  enable: false
+  enable: true
   host: localhost
   port: 4222
-  defaultTopic: myNatsTopic
 
 # 日志
-debug: true
+debug: false
 logging:
   level:
     com:
       wqz:
         example:
-          springboot: debug
+          springboot:
+            mapper: debug

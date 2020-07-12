@@ -12,7 +12,6 @@ public class NatsConfig {
     private static Boolean enable = false;
     private static String host = "localhost";
     private static Integer port = 4222;
-    private static String defaultTopic = "myNatsTopic";
 
     public static Boolean getEnable() {
         return enable;
@@ -38,11 +37,4 @@ public class NatsConfig {
         NatsConfig.port = port;
     }
 
-    public static String getDefaultTopic() {
-        return defaultTopic;
-    }
-
-    public void setDefaultTopic(String defaultTopic) {
-        NatsConfig.defaultTopic = defaultTopic;
-    }
 }
