@@ -1,0 +1,1897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="201901190106" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_COLUMN_DIC"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_COLUMN_DIC</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_COLUMN_DIC
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  col_code           VARCHAR2(60 CHAR),
+                  col_name           VARCHAR2(60 CHAR),
+                  col_c_name         VARCHAR2(150 CHAR),
+                  col_type           VARCHAR2(30 CHAR),
+                  col_type_len       NUMBER,
+                  create_user        VARCHAR2(64 CHAR),
+                  create_date        DATE,
+                  last_modified_user VARCHAR2(64 CHAR),
+                  last_modified_date DATE,
+                  kv_group_ver_id    VARCHAR2(60 CHAR)
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_COLUMN_DIC
+                  is '字段字典表';
+                comment on column TB_DFDI_COLUMN_DIC.id
+                  is '字典ID';
+                comment on column TB_DFDI_COLUMN_DIC.col_code
+                  is '字段编码';
+                comment on column TB_DFDI_COLUMN_DIC.col_name
+                  is '字段名';
+                comment on column TB_DFDI_COLUMN_DIC.col_c_name
+                  is '字段中文名';
+                comment on column TB_DFDI_COLUMN_DIC.col_type
+                  is '字段类型';
+                comment on column TB_DFDI_COLUMN_DIC.col_type_len
+                  is '字段类型长度';
+                comment on column TB_DFDI_COLUMN_DIC.create_user
+                  is '创建人';
+                comment on column TB_DFDI_COLUMN_DIC.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_COLUMN_DIC.kv_group_ver_id
+                  is '代码集版本ID';
+                alter table TB_DFDI_COLUMN_DIC
+                  add constraint PK_TB_DFDI_COLUMN_DIC primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190109" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_DEVICE"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_DEVICE</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_DEVICE
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  device_code        VARCHAR2(60 CHAR),
+                  device_name        VARCHAR2(150 CHAR),
+                  device_desc        VARCHAR2(600 CHAR),
+                  device_ip          VARCHAR2(15 CHAR),
+                  task_limits        NUMBER,
+                  create_user        VARCHAR2(64 CHAR),
+                  create_date        DATE,
+                  last_modified_user VARCHAR2(64 CHAR),
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_DEVICE
+                  is '设备表';
+                comment on column TB_DFDI_DEVICE.id
+                  is '设备ID';
+                comment on column TB_DFDI_DEVICE.device_code
+                  is '设备编码';
+                comment on column TB_DFDI_DEVICE.device_name
+                  is '设备名称';
+                comment on column TB_DFDI_DEVICE.device_desc
+                  is '设备描述';
+                comment on column TB_DFDI_DEVICE.device_ip
+                  is '设备IP';
+                comment on column TB_DFDI_DEVICE.task_limits
+                  is '设备任务总数限制';
+                comment on column TB_DFDI_DEVICE.create_user
+                  is '创建人';
+                comment on column TB_DFDI_DEVICE.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_DEVICE.last_modified_user
+                  is '最后一次修改人';
+                comment on column TB_DFDI_DEVICE.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_DEVICE
+                  add constraint PK_TB_DFDI_DEVICE primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190912" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FLOW"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_FLOW</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_FLOW
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  flow_code          VARCHAR2(60 CHAR),
+                  flow_name          VARCHAR2(150 CHAR),
+                  flow_desc          VARCHAR2(600 CHAR),
+                  is_parallel        CHAR(1 CHAR),
+                  is_cancelled       CHAR(1 CHAR),
+                  create_date        DATE,
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_FLOW
+                  is '工作流表';
+                comment on column TB_DFDI_FLOW.id
+                  is '工作流ID';
+                comment on column TB_DFDI_FLOW.flow_code
+                  is '工作流编码';
+                comment on column TB_DFDI_FLOW.flow_name
+                  is '工作流名称';
+                comment on column TB_DFDI_FLOW.flow_desc
+                  is '工作流描述';
+                comment on column TB_DFDI_FLOW.is_parallel
+                  is '是否支持并发：1-支持0-不支持';
+                comment on column TB_DFDI_FLOW.is_cancelled
+                  is '作废标志：1-已作废0-未作废';
+                comment on column TB_DFDI_FLOW.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_FLOW.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_FLOW
+                  add constraint PK_TB_DFDI_FLOW primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190117" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FLOW_INOUTLET"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_FLOW_INOUTLET</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_FLOW_INOUTLET
+                (
+                  id          VARCHAR2(60 CHAR) not null,
+                  flow_id     VARCHAR2(60 CHAR),
+                  inoutlet_id VARCHAR2(60 CHAR),
+                  in_or_out   VARCHAR2(3 CHAR),
+                  inout_name  VARCHAR2(30 CHAR)
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_FLOW_INOUTLET
+                  is '工作流与输入输出关系表';
+                comment on column TB_DFDI_FLOW_INOUTLET.flow_id
+                  is '工作流ID';
+                comment on column TB_DFDI_FLOW_INOUTLET.inoutlet_id
+                  is '输入输出描述ID';
+                comment on column TB_DFDI_FLOW_INOUTLET.in_or_out
+                  is '输入Or输出：IN-输入OUT-输出';
+                comment on column TB_DFDI_FLOW_INOUTLET.inout_name
+                  is '输入输出类型';
+                alter table TB_DFDI_FLOW_INOUTLET
+                  add constraint PK_TB_DFDI_FLOW_INOUTLET primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190920" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FUNCTOR"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_FUNCTOR</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_FUNCTOR
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  func_code          VARCHAR2(60 CHAR),
+                  func_name          VARCHAR2(150 CHAR),
+                  func_desc          VARCHAR2(600 CHAR),
+                  in_columns         VARCHAR2(300 CHAR),
+                  out_columns        VARCHAR2(300 CHAR),
+                  func_schema        CLOB,
+                  is_cancelled       CHAR(1 CHAR),
+                  create_date        DATE,
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_FUNCTOR
+                  is '算子表';
+                comment on column TB_DFDI_FUNCTOR.id
+                  is '算子ID';
+                comment on column TB_DFDI_FUNCTOR.func_code
+                  is '算子编码';
+                comment on column TB_DFDI_FUNCTOR.func_name
+                  is '算子名称';
+                comment on column TB_DFDI_FUNCTOR.func_desc
+                  is '算子描述';
+                comment on column TB_DFDI_FUNCTOR.in_columns
+                  is '输入字段集合';
+                comment on column TB_DFDI_FUNCTOR.out_columns
+                  is '输出字段集合';
+                comment on column TB_DFDI_FUNCTOR.func_schema
+                  is '算子Schema';
+                comment on column TB_DFDI_FUNCTOR.is_cancelled
+                  is '作废标志：1-已作废0-未作废';
+                comment on column TB_DFDI_FUNCTOR.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_FUNCTOR.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_FUNCTOR
+                  add constraint PK_TB_DFDI_FUNCTOR primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190922" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_INOUTLET"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_INOUTLET</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_INOUTLET
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  inout_code         VARCHAR2(60 CHAR),
+                  inout_name         VARCHAR2(150 CHAR),
+                  inout_desc         VARCHAR2(600 CHAR),
+                  datalakes          VARCHAR2(300 CHAR),
+                  functors           VARCHAR2(300 CHAR),
+                  inout_schema       CLOB,
+                  is_cancelled       CHAR(1 CHAR),
+                  create_date        DATE,
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_INOUTLET
+                  is '输入输出描述表';
+                comment on column TB_DFDI_INOUTLET.inout_code
+                  is '输入输出编码';
+                comment on column TB_DFDI_INOUTLET.inout_name
+                  is '输入输出名称';
+                comment on column TB_DFDI_INOUTLET.inout_desc
+                  is '输入输出描述';
+                comment on column TB_DFDI_INOUTLET.datalakes
+                  is '仓库类型集合';
+                comment on column TB_DFDI_INOUTLET.functors
+                  is '转换算子编码集合';
+                comment on column TB_DFDI_INOUTLET.inout_schema
+                  is '描述SCHEMA';
+                comment on column TB_DFDI_INOUTLET.is_cancelled
+                  is '作废标志:1-已作废0-未作废';
+                comment on column TB_DFDI_INOUTLET.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_INOUTLET.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_INOUTLET
+                  add constraint PK_TB_DFDI_INOUTLET primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190924" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  cat_id             VARCHAR2(60 CHAR),
+                  flow_id            VARCHAR2(60 CHAR),
+                  job_code           VARCHAR2(60 CHAR),
+                  job_name           VARCHAR2(150 CHAR),
+                  job_desc           VARCHAR2(600 CHAR),
+                  job_res_id         VARCHAR2(60 CHAR),
+                  device_parallelism NUMBER,
+                  strategy_type      VARCHAR2(30 CHAR),
+                  strategy           VARCHAR2(150 CHAR),
+                  tag                VARCHAR2(150 CHAR),
+                  create_user        VARCHAR2(64 CHAR),
+                  create_date        DATE,
+                  last_modified_user VARCHAR2(64 CHAR),
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_JOB
+                  is '作业表';
+                comment on column TB_DFDI_JOB.id
+                  is '作业ID';
+                comment on column TB_DFDI_JOB.cat_id
+                  is '作业分类ID';
+                comment on column TB_DFDI_JOB.flow_id
+                  is '工作流ID';
+                comment on column TB_DFDI_JOB.job_code
+                  is '作业编码';
+                comment on column TB_DFDI_JOB.job_name
+                  is '作业名称';
+                comment on column TB_DFDI_JOB.job_desc
+                  is '作业描述';
+                comment on column TB_DFDI_JOB.device_parallelism
+                  is '设备并发数';
+                comment on column TB_DFDI_JOB.strategy_type
+                  is '调度策略类型：
+                streaming-流式调度
+                batch-批处理调度';
+                comment on column TB_DFDI_JOB.strategy
+                  is '调度策略表达式';
+                comment on column TB_DFDI_JOB.tag
+                  is '标签';
+                comment on column TB_DFDI_JOB.create_user
+                  is '创建人';
+                comment on column TB_DFDI_JOB.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_JOB.last_modified_user
+                  is '最后一次修改人';
+                comment on column TB_DFDI_JOB.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_JOB
+                  add constraint PK_TB_DFDI_JOB primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190928" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_CAT"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB_CAT</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_CAT
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  parent_id          VARCHAR2(60 CHAR),
+                  cat_name           VARCHAR2(150 CHAR),
+                  cat_desc           VARCHAR2(600 CHAR),
+                  sort_num           NUMBER,
+                  create_user        VARCHAR2(64 CHAR),
+                  create_date        DATE,
+                  last_modified_user VARCHAR2(64 CHAR),
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_JOB_CAT
+                  is '作业分类表';
+                comment on column TB_DFDI_JOB_CAT.id
+                  is '分类ID';
+                comment on column TB_DFDI_JOB_CAT.parent_id
+                  is '父分类ID';
+                comment on column TB_DFDI_JOB_CAT.cat_name
+                  is '分类名称';
+                comment on column TB_DFDI_JOB_CAT.cat_desc
+                  is '分类描述';
+                comment on column TB_DFDI_JOB_CAT.sort_num
+                  is '排序号';
+                comment on column TB_DFDI_JOB_CAT.create_user
+                  is '创建人';
+                comment on column TB_DFDI_JOB_CAT.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_JOB_CAT.last_modified_user
+                  is '最后一次修改人';
+                comment on column TB_DFDI_JOB_CAT.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_JOB_CAT
+                  add constraint PK_TB_DFDI_JOB_CAT primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190947" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_DEVICE"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB_DEVICE</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_DEVICE
+                (
+                  id        VARCHAR2(60 CHAR) not null,
+                  job_id    VARCHAR2(60 CHAR),
+                  device_id VARCHAR2(60 CHAR)
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_JOB_DEVICE
+                  is '作业与设备关系表';
+                comment on column TB_DFDI_JOB_DEVICE.job_id
+                  is '作业ID';
+                comment on column TB_DFDI_JOB_DEVICE.device_id
+                  is '设备ID';
+                alter table TB_DFDI_JOB_DEVICE
+                  add constraint PK_TB_DFDI_JOB_DEVICE primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190949" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_FLOW_INOUTLET"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB_FLOW_INOUTLET</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_FLOW_INOUTLET
+                (
+                  id               VARCHAR2(60 CHAR) not null,
+                  job_id           VARCHAR2(60 CHAR),
+                  flow_inoutlet_id VARCHAR2(60 CHAR),
+                  db_id            VARCHAR2(64 CHAR),
+                  func_id          VARCHAR2(60 CHAR),
+                  metadata_id      VARCHAR2(60 CHAR)
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_JOB_FLOW_INOUTLET
+                  is '作业与工作流输入输出关系表';
+                comment on column TB_DFDI_JOB_FLOW_INOUTLET.job_id
+                  is '作业ID';
+                comment on column TB_DFDI_JOB_FLOW_INOUTLET.flow_inoutlet_id
+                  is '工作流输入输出关系ID';
+                comment on column TB_DFDI_JOB_FLOW_INOUTLET.db_id
+                  is '仓库ID';
+                comment on column TB_DFDI_JOB_FLOW_INOUTLET.func_id
+                  is '转换算子ID';
+                comment on column TB_DFDI_JOB_FLOW_INOUTLET.metadata_id
+                  is '元数据ID';
+                alter table TB_DFDI_JOB_FLOW_INOUTLET
+                  add constraint PK_TB_DFDI_JOB_FLOW_INOUTLET primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+
+             ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201901190950" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_INSTANCE"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB_INSTANCE</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_INSTANCE
+                (
+                  id                VARCHAR2(60 CHAR) not null,
+                  job_id            VARCHAR2(60 CHAR),
+                  job_instance_code VARCHAR2(60 CHAR),
+                  start_time        DATE,
+                  stop_time         DATE,
+                  job_data          CLOB,
+                  etl_job_data      CLOB,
+                  status            VARCHAR2(30 CHAR)
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on column TB_DFDI_JOB_INSTANCE.id
+                  is '作业实例ID';
+                comment on column TB_DFDI_JOB_INSTANCE.job_id
+                  is '作业ID';
+                comment on column TB_DFDI_JOB_INSTANCE.job_instance_code
+                  is '作业实例编码';
+                comment on column TB_DFDI_JOB_INSTANCE.start_time
+                  is '启动时间';
+                comment on column TB_DFDI_JOB_INSTANCE.stop_time
+                  is '停止时间';
+                comment on column TB_DFDI_JOB_INSTANCE.job_data
+                  is '作业JSON';
+                comment on column TB_DFDI_JOB_INSTANCE.etl_job_data
+                  is 'ETL作业JSON';
+                comment on column TB_DFDI_JOB_INSTANCE.status
+                  is '状态：created, starting, running, stopping, finished, failed';
+                alter table TB_DFDI_JOB_INSTANCE
+                  add constraint PK_TB_DFDI_JOB_INSTANCE primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190952" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_INSTANCE_TASK"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB_INSTANCE_TASK</comment>
+        <sql>
+            <![CDATA[
+               create table TB_DFDI_JOB_INSTANCE_TASK
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  job_instance_id    VARCHAR2(60 CHAR),
+                  task_name          VARCHAR2(150 CHAR),
+                  status             VARCHAR2(30 CHAR),
+                  log_file_path      VARCHAR2(300 CHAR),
+                  create_date        DATE,
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_JOB_INSTANCE_TASK
+                  is '作业实例任务表';
+                comment on column TB_DFDI_JOB_INSTANCE_TASK.id
+                  is '任务ID';
+                comment on column TB_DFDI_JOB_INSTANCE_TASK.task_name
+                  is '任务名称';
+                comment on column TB_DFDI_JOB_INSTANCE_TASK.status
+                  is '状态：starting, running, stopping, finished, failed';
+                comment on column TB_DFDI_JOB_INSTANCE_TASK.log_file_path
+                  is '日志文件路径';
+                comment on column TB_DFDI_JOB_INSTANCE_TASK.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_JOB_INSTANCE_TASK.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_JOB_INSTANCE_TASK
+                  add constraint PK_TB_DFDI_JOB_INSTANCE_TASK primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190954" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_RUNLET"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_JOB_RUNLET</comment>
+        <sql>
+            <![CDATA[
+               create table TB_DFDI_JOB_RUNLET
+                (
+                  id        VARCHAR2(60 CHAR) not null,
+                  job_id    VARCHAR2(60 CHAR),
+                  inlet_id  VARCHAR2(60 CHAR),
+                  outlet_id VARCHAR2(60 CHAR)
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_JOB_RUNLET
+                  is '作业与执行算子关系表';
+                comment on column TB_DFDI_JOB_RUNLET.job_id
+                  is '作业ID';
+                comment on column TB_DFDI_JOB_RUNLET.inlet_id
+                  is '输入';
+                comment on column TB_DFDI_JOB_RUNLET.outlet_id
+                  is '输出';
+                alter table TB_DFDI_JOB_RUNLET
+                  add constraint PK_TB_DFDI_JOB_RUNLET primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190956" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KV"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_KV</comment>
+        <sql>
+            <![CDATA[
+               create table TB_DFDI_KV
+                (
+                  id                 VARCHAR2(60 CHAR) not null,
+                  kv_group_ver_id    VARCHAR2(60 CHAR),
+                  kv_key             VARCHAR2(60 CHAR),
+                  kv_value           VARCHAR2(300 CHAR),
+                  create_user        VARCHAR2(64 CHAR),
+                  create_date        DATE,
+                  last_modified_user VARCHAR2(64 CHAR),
+                  last_modified_date DATE
+                )
+                tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 1
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+                comment on table TB_DFDI_KV
+                  is '代码表';
+                comment on column TB_DFDI_KV.id
+                  is '代码字典ID';
+                comment on column TB_DFDI_KV.kv_group_ver_id
+                  is '代码集版本ID';
+                comment on column TB_DFDI_KV.kv_key
+                  is '代码键';
+                comment on column TB_DFDI_KV.kv_value
+                  is '代码值';
+                comment on column TB_DFDI_KV.create_user
+                  is '创建人';
+                comment on column TB_DFDI_KV.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_KV.last_modified_user
+                  is '最后一次修改人';
+                comment on column TB_DFDI_KV.last_modified_date
+                  is '最后一次修改时间';
+                alter table TB_DFDI_KV
+                  add constraint PK_TB_DFDI_KV primary key (ID)
+                  using index
+                  tablespace TBS_DS_DATA
+                  pctfree 10
+                  initrans 2
+                  maxtrans 255
+                  storage
+                  (
+                    initial 1M
+                    next 1M
+                    minextents 1
+                    maxextents unlimited
+                    pctincrease 0
+                  );
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901190958" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KV_GROUP"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_KV_GROUP</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_KV_GROUP
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              group_code         VARCHAR2(60 CHAR),
+              group_name         VARCHAR2(150 CHAR),
+              group_desc         VARCHAR2(600 CHAR),
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_KV_GROUP
+              is '代码集表';
+            comment on column TB_DFDI_KV_GROUP.id
+              is '代码集ID';
+            comment on column TB_DFDI_KV_GROUP.group_code
+              is '代码集编码';
+            comment on column TB_DFDI_KV_GROUP.group_name
+              is '代码集名称';
+            comment on column TB_DFDI_KV_GROUP.group_desc
+              is '代码集描述';
+            comment on column TB_DFDI_KV_GROUP.create_user
+              is '创建人';
+            comment on column TB_DFDI_KV_GROUP.create_date
+              is '创建时间';
+            comment on column TB_DFDI_KV_GROUP.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_KV_GROUP.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_KV_GROUP
+              add constraint PK_TB_DFDI_KV_GROUP primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191001" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KV_GROUP_VER"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_KV_GROUP_VER</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_KV_GROUP_VER
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              kv_group_id        VARCHAR2(60 CHAR),
+              ver                VARCHAR2(30 CHAR),
+              ver_date           DATE,
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_KV_GROUP_VER
+              is '代码集版本表';
+            comment on column TB_DFDI_KV_GROUP_VER.id
+              is '版本ID';
+            comment on column TB_DFDI_KV_GROUP_VER.kv_group_id
+              is '代码集ID';
+            comment on column TB_DFDI_KV_GROUP_VER.ver
+              is '版本号';
+            comment on column TB_DFDI_KV_GROUP_VER.ver_date
+              is '版本时间';
+            comment on column TB_DFDI_KV_GROUP_VER.create_user
+              is '创建人';
+            comment on column TB_DFDI_KV_GROUP_VER.create_date
+              is '创建时间';
+            comment on column TB_DFDI_KV_GROUP_VER.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_KV_GROUP_VER.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_KV_GROUP_VER
+              add constraint PK_TB_DFDI_KV_GROUP_VER primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191001_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_METADATA"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_METADATA</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_METADATA
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              res_id             VARCHAR2(60 CHAR),
+              metadata_code      VARCHAR2(60 CHAR),
+              metadata_name      VARCHAR2(150 CHAR),
+              metadata_desc      VARCHAR2(600 CHAR),
+              db_type            VARCHAR2(64 CHAR),
+              is_locked_column   CHAR(1 CHAR),
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_METADATA
+              is '元数据表';
+            comment on column TB_DFDI_METADATA.id
+              is '元数据ID';
+            comment on column TB_DFDI_METADATA.res_id
+              is '资源ID';
+            comment on column TB_DFDI_METADATA.metadata_code
+              is '元数据编码';
+            comment on column TB_DFDI_METADATA.metadata_name
+              is '元数据名称';
+            comment on column TB_DFDI_METADATA.metadata_desc
+              is '元数据描述';
+            comment on column TB_DFDI_METADATA.db_type
+              is '仓库类型';
+            comment on column TB_DFDI_METADATA.is_locked_column
+              is '是否锁定字段顺序：Y-锁定字段顺序, N-不锁定字段顺序';
+            comment on column TB_DFDI_METADATA.create_user
+              is '创建人';
+            comment on column TB_DFDI_METADATA.create_date
+              is '创建时间';
+            comment on column TB_DFDI_METADATA.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_METADATA.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_METADATA
+              add constraint PK_TB_DFDI_METADATA primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191001_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_METADATA_COLUMN"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_METADATA_COLUMN</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_METADATA_COLUMN
+            (
+              id              VARCHAR2(60 CHAR) not null,
+              metadata_id     VARCHAR2(60 CHAR),
+              column_dic_id   VARCHAR2(60 CHAR),
+              column_alias    VARCHAR2(120 CHAR),
+              kv_group_ver_id VARCHAR2(60 CHAR),
+              column_sort_num NUMBER,
+              is_shared       CHAR(1 CHAR)
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_METADATA_COLUMN
+              is '元数据字段集关系表';
+            comment on column TB_DFDI_METADATA_COLUMN.metadata_id
+              is '元数据ID';
+            comment on column TB_DFDI_METADATA_COLUMN.column_dic_id
+              is '字段字典ID';
+            comment on column TB_DFDI_METADATA_COLUMN.column_alias
+              is '字段别名';
+            comment on column TB_DFDI_METADATA_COLUMN.kv_group_ver_id
+              is '代码集版本ID';
+            comment on column TB_DFDI_METADATA_COLUMN.column_sort_num
+              is '字段顺序';
+            comment on column TB_DFDI_METADATA_COLUMN.is_shared
+              is '是否共享字段：1-是0-否';
+            alter table TB_DFDI_METADATA_COLUMN
+              add constraint PK_TB_DFDI_METADATA_COLUMN primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191006_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_METADATA_TRACE"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_METADATA_TRACE</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_METADATA_TRACE
+            (
+              id              VARCHAR2(60 CHAR) not null,
+              in_metadata_id  VARCHAR2(60 CHAR),
+              out_metadata_id VARCHAR2(60 CHAR)
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_METADATA_TRACE
+              is '元数据追溯表';
+            comment on column TB_DFDI_METADATA_TRACE.id
+              is '元数据追溯ID';
+            comment on column TB_DFDI_METADATA_TRACE.in_metadata_id
+              is '输入元数据ID';
+            comment on column TB_DFDI_METADATA_TRACE.out_metadata_id
+              is '输出元数据ID';
+            alter table TB_DFDI_METADATA_TRACE
+              add constraint PK_TB_DFDI_METADATA_TRACE primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191006_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_PROPERTIES"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_PROPERTIES</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_PROPERTIES
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              prop_key           VARCHAR2(60 CHAR),
+              prop_value         VARCHAR2(3000 CHAR),
+              prop_type          VARCHAR2(60 CHAR),
+              fid                VARCHAR2(60 CHAR),
+              ftype              VARCHAR2(60 CHAR),
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_PROPERTIES
+              is '属性表';
+            comment on column TB_DFDI_PROPERTIES.prop_key
+              is '属性键';
+            comment on column TB_DFDI_PROPERTIES.prop_value
+              is '属性值';
+            comment on column TB_DFDI_PROPERTIES.prop_type
+              is '属性类型';
+            comment on column TB_DFDI_PROPERTIES.fid
+              is '外键ID';
+            comment on column TB_DFDI_PROPERTIES.ftype
+              is '外键类型：
+            INLETS-输入
+            OUTLETS-输出
+            FUNCTORS-转换算子
+            RUNLETS-执行算子';
+            comment on column TB_DFDI_PROPERTIES.create_user
+              is '创建人';
+            comment on column TB_DFDI_PROPERTIES.create_date
+              is '创建时间';
+            comment on column TB_DFDI_PROPERTIES.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_PROPERTIES.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_PROPERTIES
+              add constraint PK_TB_DFDI_PROPERTIES primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191008_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RES"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RES</comment>
+        <sql>
+            <![CDATA[
+              create table TB_DFDI_RES
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              res_group_ver_id   VARCHAR2(60 CHAR),
+              res_code           VARCHAR2(60 CHAR),
+              res_name           VARCHAR2(150 CHAR),
+              res_desc           VARCHAR2(600 CHAR),
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RES
+              is '资源表';
+            comment on column TB_DFDI_RES.id
+              is '资源ID';
+            comment on column TB_DFDI_RES.res_group_ver_id
+              is '资源集版本ID';
+            comment on column TB_DFDI_RES.res_code
+              is '资源编码';
+            comment on column TB_DFDI_RES.res_name
+              is '资源名称';
+            comment on column TB_DFDI_RES.res_desc
+              is '资源描述';
+            comment on column TB_DFDI_RES.create_user
+              is '创建人';
+            comment on column TB_DFDI_RES.create_date
+              is '创建时间';
+            comment on column TB_DFDI_RES.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_RES.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_RES
+              add constraint PK_TB_DFDI_RES primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191008_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RES_GROUP"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RES_GROUP</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_RES_GROUP
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              cat_id             VARCHAR2(60 CHAR),
+              group_name         VARCHAR2(150 CHAR),
+              group_desc         VARCHAR2(600 CHAR),
+              sort_num           NUMBER,
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RES_GROUP
+              is '资源集表';
+            comment on column TB_DFDI_RES_GROUP.id
+              is '资源集ID';
+            comment on column TB_DFDI_RES_GROUP.cat_id
+              is '分类ID';
+            comment on column TB_DFDI_RES_GROUP.group_name
+              is '资源集名称';
+            comment on column TB_DFDI_RES_GROUP.group_desc
+              is '资源集描述';
+            comment on column TB_DFDI_RES_GROUP.sort_num
+              is '排序号';
+            comment on column TB_DFDI_RES_GROUP.create_user
+              is '创建人';
+            comment on column TB_DFDI_RES_GROUP.create_date
+              is '创建时间';
+            comment on column TB_DFDI_RES_GROUP.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_RES_GROUP.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_RES_GROUP
+              add constraint PK_TB_DFDI_RES_GROUP primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191011_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RES_GROUP_CAT"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RES_GROUP_CAT</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_RES_GROUP_CAT
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              parent_id          VARCHAR2(60 CHAR),
+              cat_name           VARCHAR2(150 CHAR),
+              cat_desc           VARCHAR2(600 CHAR),
+              sort_num           NUMBER,
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RES_GROUP_CAT
+              is '资源集分类表';
+            comment on column TB_DFDI_RES_GROUP_CAT.id
+              is '分类ID';
+            comment on column TB_DFDI_RES_GROUP_CAT.parent_id
+              is '父分类ID';
+            comment on column TB_DFDI_RES_GROUP_CAT.cat_name
+              is '分类名称';
+            comment on column TB_DFDI_RES_GROUP_CAT.cat_desc
+              is '分类描述';
+            comment on column TB_DFDI_RES_GROUP_CAT.sort_num
+              is '排序号';
+            comment on column TB_DFDI_RES_GROUP_CAT.create_user
+              is '创建人';
+            comment on column TB_DFDI_RES_GROUP_CAT.create_date
+              is '创建时间';
+            comment on column TB_DFDI_RES_GROUP_CAT.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_RES_GROUP_CAT.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_RES_GROUP_CAT
+              add constraint PK_TB_DFDI_RES_GROUP_CAT primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191011_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RES_GROUP_VER"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RES_GROUP_VER</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_RES_GROUP_VER
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              group_id           VARCHAR2(60 CHAR),
+              ver                VARCHAR2(30 CHAR),
+              v_date             DATE,
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RES_GROUP_VER
+              is '资源集版本表';
+            comment on column TB_DFDI_RES_GROUP_VER.id
+              is '版本ID';
+            comment on column TB_DFDI_RES_GROUP_VER.group_id
+              is '资源集ID';
+            comment on column TB_DFDI_RES_GROUP_VER.ver
+              is '版本号';
+            comment on column TB_DFDI_RES_GROUP_VER.v_date
+              is '版本时间';
+            comment on column TB_DFDI_RES_GROUP_VER.create_user
+              is '创建人';
+            comment on column TB_DFDI_RES_GROUP_VER.create_date
+              is '创建时间';
+            comment on column TB_DFDI_RES_GROUP_VER.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_RES_GROUP_VER.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_RES_GROUP_VER
+              add constraint PK_TB_DFDI_RES_GROUP_VER primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191013_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RUNLET"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RUNLET</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_RUNLET
+            (
+              id          VARCHAR2(60 CHAR) not null,
+              fid         VARCHAR2(60 CHAR),
+              func_id     VARCHAR2(60 CHAR),
+              runlet_type VARCHAR2(10 CHAR)
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RUNLET
+              is '执行算子表';
+            comment on column TB_DFDI_RUNLET.fid
+              is '模板ID或作业执行算子ID';
+            comment on column TB_DFDI_RUNLET.func_id
+              is '算子ID';
+            comment on column TB_DFDI_RUNLET.runlet_type
+              is '执行算子类型：TEMPLATE-模板执行算子RUNLET-作业执行算子';
+            alter table TB_DFDI_RUNLET
+              add constraint PK_TB_DFDI_RUNLET primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191013_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RUNLET_COLUMN"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RUNLET_COLUMN</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_RUNLET_COLUMN
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              runlet_id          VARCHAR2(60 CHAR),
+              column_key         VARCHAR2(60 CHAR),
+              metadata_column_id VARCHAR2(60 CHAR),
+              in_or_out          VARCHAR2(3 CHAR)
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RUNLET_COLUMN
+              is '执行算子与字段关系表';
+            comment on column TB_DFDI_RUNLET_COLUMN.runlet_id
+              is '执行算子ID';
+            comment on column TB_DFDI_RUNLET_COLUMN.column_key
+              is '字段键';
+            comment on column TB_DFDI_RUNLET_COLUMN.metadata_column_id
+              is '元数据字段ID';
+            comment on column TB_DFDI_RUNLET_COLUMN.in_or_out
+              is '输入Or输出：IN-输入OUT-输出';
+            alter table TB_DFDI_RUNLET_COLUMN
+              add constraint PK_TB_DFDI_RUNLET_COLUMN primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191015_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RUNLET_KV_IN2OUT"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_RUNLET_KV_IN2OUT</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_RUNLET_KV_IN2OUT
+            (
+              id        VARCHAR2(60 CHAR) not null,
+              runlet_id VARCHAR2(60 CHAR),
+              in_kv_id  VARCHAR2(60 CHAR),
+              out_kv_id VARCHAR2(60 CHAR)
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_RUNLET_KV_IN2OUT
+              is '执行算子输入与输出代码集转换表';
+            comment on column TB_DFDI_RUNLET_KV_IN2OUT.runlet_id
+              is '执行算子ID';
+            comment on column TB_DFDI_RUNLET_KV_IN2OUT.in_kv_id
+              is '输入代码键';
+            comment on column TB_DFDI_RUNLET_KV_IN2OUT.out_kv_id
+              is '输出代码键';
+            alter table TB_DFDI_RUNLET_KV_IN2OUT
+              add constraint PK_TB_DFDI_RUNLET_KV_IN2OUT primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201901191015_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_TEMPLATE"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_TEMPLATE</comment>
+        <sql>
+            <![CDATA[
+             create table TB_DFDI_TEMPLATE
+            (
+              id                 VARCHAR2(60 CHAR) not null,
+              template_code      VARCHAR2(60 CHAR),
+              template_name      VARCHAR2(150 CHAR),
+              template_desc      VARCHAR2(600 CHAR),
+              input_metadata_id  VARCHAR2(60 CHAR),
+              output_metadata_id VARCHAR2(60 CHAR),
+              create_user        VARCHAR2(64 CHAR),
+              create_date        DATE,
+              last_modified_user VARCHAR2(64 CHAR),
+              last_modified_date DATE
+            )
+            tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 1
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+            comment on table TB_DFDI_TEMPLATE
+              is '元数据映射模板表';
+            comment on column TB_DFDI_TEMPLATE.id
+              is '模板ID';
+            comment on column TB_DFDI_TEMPLATE.template_code
+              is '模板编码';
+            comment on column TB_DFDI_TEMPLATE.template_name
+              is '模板名称';
+            comment on column TB_DFDI_TEMPLATE.template_desc
+              is '模板描述';
+            comment on column TB_DFDI_TEMPLATE.input_metadata_id
+              is '输入元数据ID';
+            comment on column TB_DFDI_TEMPLATE.output_metadata_id
+              is '输出元数据ID';
+            comment on column TB_DFDI_TEMPLATE.create_user
+              is '创建人';
+            comment on column TB_DFDI_TEMPLATE.create_date
+              is '创建时间';
+            comment on column TB_DFDI_TEMPLATE.last_modified_user
+              is '最后一次修改人';
+            comment on column TB_DFDI_TEMPLATE.last_modified_date
+              is '最后一次修改时间';
+            alter table TB_DFDI_TEMPLATE
+              add constraint PK_TB_DFDI_TEMPLATE primary key (ID)
+              using index
+              tablespace TBS_DS_DATA
+              pctfree 10
+              initrans 2
+              maxtrans 255
+              storage
+              (
+                initial 1M
+                next 1M
+                minextents 1
+                maxextents unlimited
+                pctincrease 0
+              );
+             ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201901251545_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_RES" columnName="DEFAULT_TB_NAME"/>
+            </not>
+        </preConditions>
+        <comment>指标表添加 DEFAULT_TB_NAME 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_RES"
+                ADD ( "DEFAULT_TB_NAME" VARCHAR2(150) NULL  ) ;
+                COMMENT ON COLUMN "TB_DFDI_RES"."DEFAULT_TB_NAME" IS '资源的默认表名';
+            ]]>
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

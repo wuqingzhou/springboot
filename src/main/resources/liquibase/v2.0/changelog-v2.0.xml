@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="201902251112_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_COLUMN_DIC" columnName="RES_GROUP_VER_ID"/>
+            </not>
+        </preConditions>
+        <comment>字段字典表添加 RES_GROUP_VER_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_COLUMN_DIC"
+                ADD ( "RES_GROUP_VER_ID" VARCHAR2(60) NULL  ) ;
+                comment on column TB_DFDI_COLUMN_DIC.RES_GROUP_VER_ID is '资源集版本ID';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KV_GROUP_BELONG"/>
+            </not>
+        </preConditions>
+        <comment>代码集隶属表</comment>
+        <sql>
+            <![CDATA[
+            create table TB_DFDI_KV_GROUP_BELONG
+            (
+               ID                   VARCHAR2(60 CHAR)    not null,
+               KV_GROUP_ID          VARCHAR2(60 CHAR),
+               BELONG_TYPE          CHAR(1 CHAR),
+               BELONG_ID            VARCHAR2(60 CHAR),
+               constraint PK_TB_DFDI_KV_GROUP_BELONG primary key (ID)
+            );
+
+            comment on table TB_DFDI_KV_GROUP_BELONG is '代码集隶属表';
+            comment on column TB_DFDI_KV_GROUP_BELONG.KV_GROUP_ID is '代码集ID';
+            comment on column TB_DFDI_KV_GROUP_BELONG.BELONG_TYPE is '隶属类型：1-国标 2-资源集 3-资源';
+            comment on column TB_DFDI_KV_GROUP_BELONG.BELONG_ID is'隶属ID';
+             ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_03" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_METADATA_COLUMN" columnName="COL_CODE"/>
+            </not>
+        </preConditions>
+        <comment>元数据字段表添加 COL_CODE 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_METADATA_COLUMN"
+                ADD ( "COL_CODE" VARCHAR2(60) NULL  ) ;
+                comment on column TB_DFDI_METADATA_COLUMN.COL_CODE is '字段编码';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_04" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_METADATA_COLUMN" columnName="COL_NAME"/>
+            </not>
+        </preConditions>
+        <comment>元数据字段表添加 COL_NAME 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_METADATA_COLUMN"
+                ADD ( "COL_NAME" VARCHAR2(60) NULL  ) ;
+                comment on column TB_DFDI_METADATA_COLUMN.COL_NAME is '字段名';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_05" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_METADATA_COLUMN" columnName="COL_C_NAME"/>
+            </not>
+        </preConditions>
+        <comment>元数据字段表添加 COL_C_NAME 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_METADATA_COLUMN"
+                ADD ( "COL_C_NAME" VARCHAR2(150) NULL  ) ;
+                comment on column TB_DFDI_METADATA_COLUMN.COL_C_NAME is '字段中文名';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_06" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_METADATA_COLUMN" columnName="COL_TYPE"/>
+            </not>
+        </preConditions>
+        <comment>元数据字段表添加 COL_TYPE 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_METADATA_COLUMN"
+                ADD ( "COL_TYPE" VARCHAR2(30) NULL  ) ;
+                comment on column TB_DFDI_METADATA_COLUMN.COL_TYPE is '字段类型';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_07" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_METADATA_COLUMN" columnName="COL_TYPE_LEN"/>
+            </not>
+        </preConditions>
+        <comment>元数据字段表添加 COL_TYPE_LEN 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_METADATA_COLUMN"
+                ADD ( "COL_TYPE_LEN" NUMBER NULL  ) ;
+                comment on column TB_DFDI_METADATA_COLUMN.COL_TYPE_LEN is '字段类型长度';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_08" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RUNLET_KV_IN2OUT-IN_KV_ID-UPDATE"/>
+            </not>
+        </preConditions>
+        <comment>执行算子输入输出代码转换表重命名 IN_KV_ID 字段 to IN_KV</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_RUNLET_KV_IN2OUT" RENAME COLUMN "IN_KV_ID" TO "IN_KV";
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_09" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RUNLET_KV_IN2OUT-OUT_KV_ID-UPDATE"/>
+            </not>
+        </preConditions>
+        <comment>执行算子输入输出代码转换表重命名 OUT_KV_ID 字段 to OUT_KV</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_RUNLET_KV_IN2OUT" RENAME COLUMN "OUT_KV_ID" TO "OUT_KV";
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201902251112_10" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_RUNLET_KV_IN2OUT" columnName="IN_IS_KV_ID"/>
+            </not>
+        </preConditions>
+        <comment>执行算子输入输出代码转换表添加 IN_IS_KV_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_RUNLET_KV_IN2OUT"
+                ADD ( "IN_IS_KV_ID" CHAR(1 CHAR) NULL  ) ;
+                comment on column TB_DFDI_RUNLET_KV_IN2OUT.IN_IS_KV_ID is '输入是否是代码字典： 1-是；0-否';
+            ]]>
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="201902251112_12" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_RUNLET_KV_IN2OUT" columnName="OUT_IS_KV_ID"/>
+            </not>
+        </preConditions>
+        <comment>执行算子输入输出代码转换表添加 OUT_IS_KV_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_RUNLET_KV_IN2OUT"
+                ADD ( "OUT_IS_KV_ID" CHAR(1 CHAR) NULL  ) ;
+                comment on column TB_DFDI_RUNLET_KV_IN2OUT.OUT_IS_KV_ID is '输出是否是代码字典： 1-是；0-否';
+            ]]>
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="201903280933_01" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_FLOW_INOUTLET-METADATA_ID-UPDATE"/>
+            </not>
+        </preConditions>
+        <comment>作业与工作流输入输出关系表 METADATA_ID 字段修改 to METADATA_IDS</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_FLOW_INOUTLET"
+                MODIFY ( "METADATA_ID" VARCHAR2(2000 CHAR) ) ;
+                ALTER TABLE "TB_DFDI_JOB_FLOW_INOUTLET" RENAME COLUMN "METADATA_ID" TO "METADATA_IDS";
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201903280933_02" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_RUNLET" columnName="IN_METADATA_ID"/>
+            </not>
+        </preConditions>
+        <comment>执行算子输入输出代码转换表添加 IN_METADATA_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_RUNLET"
+                ADD ( "IN_METADATA_ID" VARCHAR2(60 CHAR) NULL  ) ;
+                comment on column TB_DFDI_JOB_RUNLET.IN_METADATA_ID is '输入元数据Id';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201903280933_03" author="wuzy">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_RUNLET" columnName="OUT_METADATA_ID"/>
+            </not>
+        </preConditions>
+        <comment>执行算子输入输出代码转换表添加 OUT_METADATA_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_RUNLET"
+                ADD ( "OUT_METADATA_ID" VARCHAR2(60 CHAR) NULL  ) ;
+                comment on column TB_DFDI_JOB_RUNLET.OUT_METADATA_ID is '输出元数据Id';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201906051900_01" author="gaok">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_CUSTOM_FUNCTOR" />
+            </not>
+        </preConditions>
+        <comment>创建自定义算子表</comment>
+        <sql>
+            <![CDATA[
+                create table DSJOB.TB_DFDI_CUSTOM_FUNCTOR
+                (
+                  func_code   VARCHAR2(50) not null,
+                  create_date DATE,
+                  create_user VARCHAR2(20),
+                  func_script CLOB,
+                  update_user VARCHAR2(20),
+                  update_date DATE
+                )
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201906051900_02" author="gaok">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_COLUMN_INFO" columnName="COLUMN_NAME_CH"/>
+            </and>
+        </preConditions>
+        <comment>更改COLUMN_NAME_CH字段长度</comment>
+        <sql>
+            <![CDATA[
+                alter  TB_DFDI_COLUMN_INFO modify COLUMN_NAME_CH varchar2(128)
+            ]]>
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

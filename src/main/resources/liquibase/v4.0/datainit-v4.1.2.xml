@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="201912031800_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="0">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE66450FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>更新映射关系表插入初始数据</comment>
+        <sql>
+            <![CDATA[
+                    insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE)
+                    values ('91015467AE66450FE055000000000001', null, null, 'BA3E45B227864D70979E2C36C8FE81AC', 'MySql');
+
+                    insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE)
+                    values ('91015467AE62450FE055000000000001', null, null, 'BA3E45B227864D70979E2C36C8FE81AC', 'OracleDB');
+
+                    insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE)
+                    values ('91015467AE65450FE055000000000001', null, null, 'BA3E45B227864D70979E2C36C8FE81AC', 'MatrixHive');
+
+                    insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE)
+                    values ('91015467AE67450FE055000000000001', null, null, 'BA3E45B227864D70979E2C36C8FE81AC', 'SQLServer');
+
+                    insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE)
+                    values ('91015467AE68450FE055000000000001', null, null, 'BA3E45B227864D70979E2C36C8FE81AC', 'Kdb');
+
+                ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201912031800_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_DB_KEYWORD"/>
+                <sqlCheck expectedResult="0">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_DB_KEYWORD where ID='8FFBF99A25E677F0E055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sqlFile path="liquibase/sqlfile/keyword.sql"></sqlFile>
+    </changeSet>
+    <changeSet id="201912031800_03" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="1">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE66450FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sql>
+            <![CDATA[
+                    update  TB_DFDI_TABLE_MODEL_MAPPING  set OUTLET_CODE = 'gabd-zip-outlet' where ID='91015467AE66450FE055000000000001'
+                ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201912031800_04" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="1">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE62450FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sql>
+            <![CDATA[
+                    update  TB_DFDI_TABLE_MODEL_MAPPING  set OUTLET_CODE = 'gabd-zip-outlet' where ID='91015467AE62450FE055000000000001'
+                ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201912031800_05" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="1">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE65450FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sql>
+            <![CDATA[
+                    update  TB_DFDI_TABLE_MODEL_MAPPING  set OUTLET_CODE = 'gabd-zip-outlet' where ID='91015467AE65450FE055000000000001'
+                ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201912031800_06" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="1">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE67450FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sql>
+            <![CDATA[
+                    update  TB_DFDI_TABLE_MODEL_MAPPING  set OUTLET_CODE = 'gabd-zip-outlet' where ID='91015467AE67450FE055000000000001'
+                ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201912031800_07" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="1">
+                    <![CDATA[
+                    select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE68450FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sql>
+            <![CDATA[
+                    update  TB_DFDI_TABLE_MODEL_MAPPING  set OUTLET_CODE = 'gabd-zip-outlet' where ID='91015467AE68450FE055000000000001'
+                ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201912031800_08" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <sqlCheck expectedResult="0">
+                    <![CDATA[
+                    select COUNT(name)  from user_source where type='PROCEDURE' AND name =  'DFDI_INIT';
+                    ]]>
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <comment>删除旧存储过程</comment>
+        <sql>
+            drop procedure  DFDI_INIT;
+        </sql>
+    </changeSet>
+    <changeSet id="202004172110_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB_MODEL"/>
+            </and>
+        </preConditions>
+        <comment>新建model表的初始化存储过程</comment>
+        <createProcedure path="liquibase/sqlfile/job_model.sql"></createProcedure>
+    </changeSet>
+    <changeSet id="202004172110_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB_MODEL"/>
+            </and>
+        </preConditions>
+        <comment>执行model存储过程</comment>
+        <sql>call dfdi_init();</sql>
+    </changeSet>
+    <changeSet id="201912031800_11" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+                <sqlCheck expectedResult="0">
+                    <![CDATA[
+                      select count(*) from TB_DFDI_TABLE_MODEL_MAPPING where ID='91015467AE81560FE055000000000001';
+                    ]]>
+                </sqlCheck>
+            </and>
+        </preConditions>
+        <comment>更新model_mapping表数据</comment>
+        <sql>
+            insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE, OUTLET_CODE)
+            values ('91015467AE81560FE055000000000001', null, null, '3A6F684A58A943F4B99F8C8B68B51DE9', 'MatrixHive', 'tg-zip-outlet');
+
+            insert into TB_DFDI_TABLE_MODEL_MAPPING (ID, DB_ID, TABLE_NAME, JOB_MODEL_ID, ORIGINAL_DB_TYPE, OUTLET_CODE)
+            values ('91015467AE70450FE055000000000001', null, null, '15EDB863327D403D97475246EFF24EED', 'OracleDB', 'tg-zip-outlet');
+        </sql>
+    </changeSet>
+    <changeSet id="202003251500_00" author="chenwq">
+        <preConditions>
+            <tableExists tableName="TB_DFDI_DB_KEYWORD"></tableExists>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sqlFile path="liquibase/sqlfile/keyword_v2.sql"></sqlFile>
+    </changeSet>
+    
+    <changeSet id="202005141918_00" author="lvdd">
+        <preConditions>
+            <tableExists tableName="TB_DFDI_DB_KEYWORD"></tableExists>
+        </preConditions>
+        <comment>keyword表插入初始数据</comment>
+        <sqlFile path="liquibase/sqlfile/keyword_v3.sql"></sqlFile>
+    </changeSet>
+
+
+    <changeSet id="202005142035_00" author="lvdd">
+        <preConditions>
+            <tableExists tableName="TB_DFDI_DB_KEYWORD"></tableExists>
+        </preConditions>
+        <comment>keyword表更正Oracle初始化数据</comment>
+        <sql>
+            DELETE FROM TB_DFDI_DB_KEYWORD WHERE ORIGINAL_DB_TYPE='OracleDB';
+            insert into TB_DFDI_DB_KEYWORD(KEYWORD,ORIGINAL_DB_TYPE,KEYWORD_ALIAS) select KEYWORD,'OracleDB' AS ORIGINAL_DB_TYPE,'"'||KEYWORD||'"' as KEYWORD_ALIAS from v$reserved_words where reserved='Y' and regexp_like(KEYWORD,'[0-9a-zA-Z_]');
+            commit;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
