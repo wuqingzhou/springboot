@@ -5,6 +5,9 @@ spring:
   redis:
     host: localhost
     port: 6379
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/changelog.xml
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521/orcl
@@ -37,16 +40,20 @@ app-config:
 
 # nats配置
 nats:
-  enable: true
+  enable: false
   host: localhost
   port: 4222
 
 # 日志
-debug: false
+debug: true
 logging:
   level:
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            logging: info
     com:
       wqz:
         example:
-          springboot:
-            mapper: debug
+          springboot: debug

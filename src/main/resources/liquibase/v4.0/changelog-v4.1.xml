@@ -1,0 +1,3817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- 作废表开始 -->
+    <changeSet id="201906262016_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_FLOW" primaryKeyName="PK_TB_DFDI_FLOW" />
+                <not>
+                    <columnExists tableName="TB_DFDI_FLOW" columnName="INLET_CODES" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除工作流表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_FLOW DROP constraint PK_TB_DFDI_FLOW;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_FLOW"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_FLOW" columnName="INLET_CODES" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废工作流表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW" RENAME TO "DEL_TB_DFDI_FLOW";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_03" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_FLOW_HIS" primaryKeyName="PK_TB_DFDI_FLOW_HIS"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="INLET_CODES" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除工作流历史表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_FLOW_HIS DROP constraint PK_TB_DFDI_FLOW_HIS;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_04" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_FLOW_HIS"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="INLET_CODES" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废工作流历史表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW_HIS" RENAME TO "DEL_TB_DFDI_FLOW_HIS";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_05" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_JOB" primaryKeyName="PK_TB_DFDI_JOB"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_JOB" columnName="VECTOR_JSON" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除作业表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_JOB DROP constraint PK_TB_DFDI_JOB;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_06" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_JOB" columnName="VECTOR_JSON" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废作业表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB" RENAME TO "DEL_TB_DFDI_JOB";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_07" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_INOUTLET" primaryKeyName="PK_TB_DFDI_INOUTLET"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_INOUTLET" columnName="LET_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除读取入库定义表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_INOUTLET DROP constraint PK_TB_DFDI_INOUTLET;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_08" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_INOUTLET"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_INOUTLET" columnName="LET_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废读取入库定义表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_INOUTLET" RENAME TO "DEL_TB_DFDI_INOUTLET";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_09" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_INOUTLET_HIS"
+                                  primaryKeyName="PK_TB_DFDI_INOUTLET_HIS"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_INOUTLET_HIS" columnName="LET_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除读取入库定义历史表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_INOUTLET_HIS DROP constraint PK_TB_DFDI_INOUTLET_HIS;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_10" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_INOUTLET_HIS"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_INOUTLET_HIS" columnName="LET_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废读取入库定义历史表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_INOUTLET_HIS" RENAME TO "DEL_TB_DFDI_INOUTLET_HIS";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_11" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_FUNCTOR" primaryKeyName="PK_TB_DFDI_FUNCTOR"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_FUNCTOR" columnName="FUNC_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除算子定义表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_FUNCTOR DROP constraint PK_TB_DFDI_FUNCTOR;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_12" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_FUNCTOR"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_FUNCTOR" columnName="FUNC_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废算子定义表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FUNCTOR" RENAME TO "DEL_TB_DFDI_FUNCTOR";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_13" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_FUNCTOR_HIS"
+                                  primaryKeyName="PK_TB_DFDI_FUNCTOR_HIS"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_FUNCTOR_HIS" columnName="FUNC_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除算子定义历史表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_FUNCTOR_HIS DROP constraint PK_TB_DFDI_FUNCTOR_HIS;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_14" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_FUNCTOR_HIS"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_FUNCTOR_HIS" columnName="FUNC_TYPE" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废算子定义历史表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FUNCTOR_HIS" RENAME TO "DEL_TB_DFDI_FUNCTOR_HIS";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_15" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_JOB_OPLOG"
+                                  primaryKeyName="PK_TB_DFDI_JOB_OPLOG"></primaryKeyExists>
+            </and>
+        </preConditions>
+        <comment>删除作业操作日志表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_JOB_OPLOG DROP constraint PK_TB_DFDI_JOB_OPLOG;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_16" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB_OPLOG"/>
+            </and>
+        </preConditions>
+        <comment>作废作业操作日志表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_OPLOG" RENAME TO "DEL_TB_DFDI_JOB_OPLOG";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_17" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_JOB_RUNLOG"
+                                  primaryKeyName="PK_TB_DFDI_JOB_RUNLOG"></primaryKeyExists>
+            </and>
+        </preConditions>
+        <comment>删除作业操作日志表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_JOB_RUNLOG DROP constraint PK_TB_DFDI_JOB_RUNLOG;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_18" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB_RUNLOG"/>
+            </and>
+        </preConditions>
+        <comment>作废作业操作日志表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_RUNLOG" RENAME TO "DEL_TB_DFDI_JOB_RUNLOG";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_19" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_JOB_SECTION"
+                                  primaryKeyName="PK_TB_DFDI_JOB_SECTION"></primaryKeyExists>
+            </and>
+        </preConditions>
+        <comment>删除作业操作日志表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_JOB_SECTION DROP constraint PK_TB_DFDI_JOB_SECTION;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_20" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB_SECTION"/>
+            </and>
+        </preConditions>
+        <comment>作废作业操作日志表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_SECTION" RENAME TO "DEL_TB_DFDI_JOB_SECTION";
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_21" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <primaryKeyExists tableName="TB_DFDI_JOB_SECTION_RUNLOG"
+                                  primaryKeyName="PK_TB_DFDI_JOB_SECTION_RUNLOG"></primaryKeyExists>
+                <not>
+                    <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="STOP_TIME" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>删除作业操作日志表主键约束</comment>
+        <sql>
+            <![CDATA[
+                    ALTER TABLE TB_DFDI_JOB_SECTION_RUNLOG DROP constraint PK_TB_DFDI_JOB_SECTION_RUNLOG;
+                 ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_22" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <tableExists tableName="TB_DFDI_JOB_SECTION_RUNLOG"/>
+                <not>
+                    <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="STOP_TIME" />
+                </not>
+            </and>
+        </preConditions>
+        <comment>作废作业操作日志表</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_SECTION_RUNLOG" RENAME TO "DEL_TB_DFDI_JOB_SECTION_RUNLOG";
+             ]]>
+        </sql>
+    </changeSet>
+    <!-- 作废表结束 -->
+
+    <!-- 创建表开始 -->
+    <changeSet id="201906262016_23" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FLOW"/>
+            </not>
+        </preConditions>
+        <comment>工作流表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_FLOW
+                (
+                   ID                   VARCHAR2(60 CHAR)    not null,
+                   FLOW_CODE            VARCHAR2(60 CHAR),
+                   FLOW_NAME            VARCHAR2(150 CHAR),
+                   FLOW_DESC            VARCHAR2(600 CHAR),
+                   INLET_IDS            VARCHAR2(1500 CHAR),
+                   OUTLET_IDS           VARCHAR2(1500 CHAR),
+                   IS_PARALLEL          CHAR(1 CHAR),
+                   CREATE_DATE          DATE,
+                   LAST_MODIFIED_DATE   DATE,
+                   constraint PK_TB_DFDI_FLOW primary key (ID)
+                );
+
+                comment on table TB_DFDI_FLOW is
+                '工作流表';
+
+                comment on column TB_DFDI_FLOW.ID is
+                '工作流ID';
+
+                comment on column TB_DFDI_FLOW.FLOW_CODE is
+                '工作流编码';
+
+                comment on column TB_DFDI_FLOW.FLOW_NAME is
+                '工作流名称';
+
+                comment on column TB_DFDI_FLOW.FLOW_DESC is
+                '工作流描述';
+
+                comment on column TB_DFDI_FLOW.INLET_IDS is
+                '读取定义ID集合';
+
+                comment on column TB_DFDI_FLOW.OUTLET_IDS is
+                '入库定义ID集合';
+
+                comment on column TB_DFDI_FLOW.IS_PARALLEL is
+                '是否支持并发：
+                1-支持
+                0-不支持';
+
+                comment on column TB_DFDI_FLOW.CREATE_DATE is
+                '创建时间';
+
+                comment on column TB_DFDI_FLOW.LAST_MODIFIED_DATE is
+                '最后一次修改时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_24" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FLOW_HIS"/>
+            </not>
+        </preConditions>
+        <comment>工作流历史表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_FLOW_HIS
+                (
+                   ID                   VARCHAR2(60 CHAR)    not null,
+                   HIS_ID               VARCHAR2(60 CHAR)    not null,
+                   FLOW_CODE            VARCHAR2(60 CHAR),
+                   FLOW_NAME            VARCHAR2(150 CHAR),
+                   FLOW_DESC            VARCHAR2(600 CHAR),
+                   INLET_IDS            VARCHAR2(1500 CHAR),
+                   OUTLET_IDS           VARCHAR2(1500 CHAR),
+                   IS_PARALLEL          CHAR(1 CHAR),
+                   CREATE_DATE          DATE,
+                   LAST_MODIFIED_DATE   DATE,
+                   DELETE_DATE          DATE,
+                   constraint PK_TB_DFDI_FLOW_HIS primary key (ID)
+                );
+
+                comment on table TB_DFDI_FLOW_HIS is
+                '工作流历史表';
+
+                comment on column TB_DFDI_FLOW_HIS.ID is
+                'ID';
+
+                comment on column TB_DFDI_FLOW_HIS.HIS_ID is
+                '原工作流ID';
+
+                comment on column TB_DFDI_FLOW_HIS.FLOW_CODE is
+                '工作流编码';
+
+                comment on column TB_DFDI_FLOW_HIS.FLOW_NAME is
+                '工作流名称';
+
+                comment on column TB_DFDI_FLOW_HIS.FLOW_DESC is
+                '工作流描述';
+
+                comment on column TB_DFDI_FLOW_HIS.INLET_IDS is
+                '读取定义ID集合';
+
+                comment on column TB_DFDI_FLOW_HIS.OUTLET_IDS is
+                '入库定义ID集合';
+
+                comment on column TB_DFDI_FLOW_HIS.IS_PARALLEL is
+                '是否支持并发：1-支持0-不支持';
+
+                comment on column TB_DFDI_FLOW_HIS.CREATE_DATE is
+                '创建时间';
+
+                comment on column TB_DFDI_FLOW_HIS.LAST_MODIFIED_DATE is
+                '最后一次修改时间';
+
+                comment on column TB_DFDI_FLOW_HIS.DELETE_DATE is
+                '作废时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_26" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FUNCTOR"/>
+            </not>
+        </preConditions>
+        <comment>算子定义表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_FUNCTOR
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				FUNC_TYPE            VARCHAR2(30 CHAR),
+				FUNC_CODE            VARCHAR2(60 CHAR),
+				FUNC_NAME            VARCHAR2(150 CHAR),
+				FUNC_DESC            VARCHAR2(600 CHAR),
+				IN_COLUMNS           VARCHAR2(300 CHAR),
+				OUT_COLUMNS          VARCHAR2(300 CHAR),
+				FUNC_SCHEMA          CLOB,
+				FUNC_DEF             CLOB,
+				FUNC_TAG             VARCHAR2(300 CHAR),
+				CREATE_DATE          DATE,
+				CREATE_USER          VARCHAR2(64 CHAR),
+				LAST_MODIFIED_DATE   DATE,
+				LAST_MODIFIED_USER   VARCHAR2(64 CHAR),
+				constraint PK_TB_DFDI_FUNCTOR primary key (ID)
+				);
+
+				comment on table TB_DFDI_FUNCTOR is
+				'算子定义表';
+
+				comment on column TB_DFDI_FUNCTOR.ID is
+				'算子ID';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_TYPE is
+				'算子类型：ser-functor, des-functor, util-functor, ho-functor, row-functor, rule-functor';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_CODE is
+				'算子编码';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_NAME is
+				'算子名称';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_DESC is
+				'算子描述';
+
+				comment on column TB_DFDI_FUNCTOR.IN_COLUMNS is
+				'输入字段集合';
+
+				comment on column TB_DFDI_FUNCTOR.OUT_COLUMNS is
+				'输出字段集合';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_SCHEMA is
+				'算子Schema';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_DEF is
+				'算子定义';
+
+				comment on column TB_DFDI_FUNCTOR.FUNC_TAG is
+				'算子标签';
+
+				comment on column TB_DFDI_FUNCTOR.CREATE_DATE is
+				'创建时间';
+
+				comment on column TB_DFDI_FUNCTOR.CREATE_USER is
+				'创建人';
+
+				comment on column TB_DFDI_FUNCTOR.LAST_MODIFIED_DATE is
+				'最后一次修改时间';
+
+				comment on column TB_DFDI_FUNCTOR.LAST_MODIFIED_USER is
+				'最后一次修改人';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_27" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FUNCTOR_HIS"/>
+            </not>
+        </preConditions>
+        <comment>算子定义历史表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_FUNCTOR_HIS
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				HIS_ID               VARCHAR2(60 CHAR)    not null,
+				FUNC_TYPE            VARCHAR2(30 CHAR),
+				FUNC_CODE            VARCHAR2(60 CHAR),
+				FUNC_NAME            VARCHAR2(150 CHAR),
+				FUNC_DESC            VARCHAR2(600 CHAR),
+				IN_COLUMNS           VARCHAR2(300 CHAR),
+				OUT_COLUMNS          VARCHAR2(300 CHAR),
+				FUNC_SCHEMA          CLOB,
+				FUNC_DEF             CLOB,
+				FUNC_TAG             VARCHAR2(300 CHAR),
+				CREATE_DATE          DATE,
+				LAST_MODIFIED_DATE   DATE,
+				DELETE_DATE          DATE,
+				constraint PK_TB_DFDI_FUNCTOR_HIS primary key (ID)
+				);
+
+				comment on table TB_DFDI_FUNCTOR_HIS is
+				'算子定义历史表';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.ID is
+				'ID';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.HIS_ID is
+				'原算子ID';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_TYPE is
+				'算子类型：ser-functor, des-functor, util-functor, ho-functor, row-functor, rule-functor';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_CODE is
+				'算子编码';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_NAME is
+				'算子名称';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_DESC is
+				'算子描述';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.IN_COLUMNS is
+				'输入字段集合';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.OUT_COLUMNS is
+				'输出字段集合';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_SCHEMA is
+				'算子Schema';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_DEF is
+				'算子定义';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.FUNC_TAG is
+				'算子标签';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.CREATE_DATE is
+				'创建时间';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.LAST_MODIFIED_DATE is
+				'最后一次修改时间';
+
+				comment on column TB_DFDI_FUNCTOR_HIS.DELETE_DATE is
+				'作废时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_28" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_INOUTLET"/>
+            </not>
+        </preConditions>
+        <comment>读取入库定义表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_INOUTLET
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				LET_TYPE             VARCHAR2(15 CHAR),
+				INOUT_CODE           VARCHAR2(60 CHAR),
+				INOUT_NAME           VARCHAR2(150 CHAR),
+				INOUT_DESC           VARCHAR2(600 CHAR),
+				DATALAKES            VARCHAR2(300 CHAR),
+				FUNCTORS             VARCHAR2(300 CHAR),
+				INOUT_SCHEMA         CLOB,
+				CREATE_DATE          DATE,
+				LAST_MODIFIED_DATE   DATE,
+				constraint PK_TB_DFDI_INOUTLET primary key (ID)
+				);
+
+				comment on table TB_DFDI_INOUTLET is
+				'读取入库定义表';
+
+				comment on column TB_DFDI_INOUTLET.LET_TYPE is
+				'读取或入库：inlet-读取；outlet-入库';
+
+				comment on column TB_DFDI_INOUTLET.INOUT_CODE is
+				'读取入库编码';
+
+				comment on column TB_DFDI_INOUTLET.INOUT_NAME is
+				'读取入库名称';
+
+				comment on column TB_DFDI_INOUTLET.INOUT_DESC is
+				'读取入库描述';
+
+				comment on column TB_DFDI_INOUTLET.DATALAKES is
+				'仓库类型集合';
+
+				comment on column TB_DFDI_INOUTLET.FUNCTORS is
+				'策略编码集合';
+
+				comment on column TB_DFDI_INOUTLET.INOUT_SCHEMA is
+				'描述SCHEMA';
+
+				comment on column TB_DFDI_INOUTLET.CREATE_DATE is
+				'创建时间';
+
+				comment on column TB_DFDI_INOUTLET.LAST_MODIFIED_DATE is
+				'最后一次修改时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_29" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_INOUTLET_HIS"/>
+            </not>
+        </preConditions>
+        <comment>读取入库定义历史表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_INOUTLET_HIS
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				HIS_ID               VARCHAR2(60 CHAR)    not null,
+				LET_TYPE             VARCHAR2(15 CHAR),
+				INOUT_CODE           VARCHAR2(60 CHAR),
+				INOUT_NAME           VARCHAR2(150 CHAR),
+				INOUT_DESC           VARCHAR2(600 CHAR),
+				DATALAKES            VARCHAR2(300 CHAR),
+				FUNCTORS             VARCHAR2(300 CHAR),
+				INOUT_SCHEMA         CLOB,
+				CREATE_DATE          DATE,
+				LAST_MODIFIED_DATE   DATE,
+				DELETE_DATE          DATE,
+				constraint PK_TB_DFDI_INOUTLET_HIS primary key (ID)
+				);
+
+				comment on table TB_DFDI_INOUTLET_HIS is
+				'读取入库定义历史表';
+
+				comment on column TB_DFDI_INOUTLET_HIS.ID is
+				'ID';
+
+				comment on column TB_DFDI_INOUTLET_HIS.HIS_ID is
+				'原读取入库定义ID';
+
+				comment on column TB_DFDI_INOUTLET_HIS.LET_TYPE is
+				'读取或入库：inlet-读取；outlet-入库';
+
+				comment on column TB_DFDI_INOUTLET_HIS.INOUT_CODE is
+				'读取入库编码';
+
+				comment on column TB_DFDI_INOUTLET_HIS.INOUT_NAME is
+				'读取入库名称';
+
+				comment on column TB_DFDI_INOUTLET_HIS.INOUT_DESC is
+				'读取入库描述';
+
+				comment on column TB_DFDI_INOUTLET_HIS.DATALAKES is
+				'仓库类型集合';
+
+				comment on column TB_DFDI_INOUTLET_HIS.FUNCTORS is
+				'策略编码集合';
+
+				comment on column TB_DFDI_INOUTLET_HIS.INOUT_SCHEMA is
+				'描述SCHEMA';
+
+				comment on column TB_DFDI_INOUTLET_HIS.CREATE_DATE is
+				'创建时间';
+
+				comment on column TB_DFDI_INOUTLET_HIS.LAST_MODIFIED_DATE is
+				'最后一次修改时间';
+
+				comment on column TB_DFDI_INOUTLET_HIS.DELETE_DATE is
+				'作废时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_30" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB"/>
+            </not>
+        </preConditions>
+        <comment>作业表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_JOB
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				CAT_ID               VARCHAR2(60 CHAR),
+				JOB_CODE             VARCHAR2(60 CHAR),
+				JOB_NAME             VARCHAR2(150 CHAR),
+				JOB_DESC             VARCHAR2(600 CHAR),
+				TAG                  VARCHAR2(150 CHAR),
+				VECTOR_JSON          CLOB,
+				STATUS               CHAR(1 CHAR),
+				START_TIME           DATE,
+				STOP_TIME            DATE,
+				VALIDITY_FROM        DATE,
+				VALIDITY_TO          DATE,
+				ZFBZ                 CHAR(1 CHAR),
+				DELETE_DATE          DATE,
+				CREATE_USER          VARCHAR2(64 CHAR),
+				CREATE_DATE          DATE,
+				LAST_MODIFIED_USER   VARCHAR2(64 CHAR),
+				LAST_MODIFIED_DATE   DATE,
+				constraint PK_TB_DFDI_JOB primary key (ID)
+				);
+
+				comment on table TB_DFDI_JOB is
+				'作业表';
+
+				comment on column TB_DFDI_JOB.ID is
+				'作业ID';
+
+				comment on column TB_DFDI_JOB.CAT_ID is
+				'作业分类ID';
+
+				comment on column TB_DFDI_JOB.JOB_CODE is
+				'作业编码';
+
+				comment on column TB_DFDI_JOB.JOB_NAME is
+				'作业名称';
+
+				comment on column TB_DFDI_JOB.JOB_DESC is
+				'作业描述';
+
+				comment on column TB_DFDI_JOB.TAG is
+				'标签';
+
+				comment on column TB_DFDI_JOB.VECTOR_JSON is
+				'矢量图JSON';
+
+				comment on column TB_DFDI_JOB.STATUS is
+				'状态：1-正常 2-异常 3-未知';
+
+				comment on column TB_DFDI_JOB.START_TIME is
+				'启动时间';
+
+				comment on column TB_DFDI_JOB.STOP_TIME is
+				'停止时间';
+
+				comment on column TB_DFDI_JOB.VALIDITY_FROM is
+				'有效期起';
+
+				comment on column TB_DFDI_JOB.VALIDITY_TO is
+				'有效期止';
+
+				comment on column TB_DFDI_JOB.ZFBZ is
+				'作废标志：1-作废；0-未作废';
+
+				comment on column TB_DFDI_JOB.DELETE_DATE is
+				'作废时间';
+
+				comment on column TB_DFDI_JOB.CREATE_USER is
+				'创建人';
+
+				comment on column TB_DFDI_JOB.CREATE_DATE is
+				'创建时间';
+
+				comment on column TB_DFDI_JOB.LAST_MODIFIED_USER is
+				'最后一次修改人';
+
+				comment on column TB_DFDI_JOB.LAST_MODIFIED_DATE is
+				'最后一次修改时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_31" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_CAT"/>
+            </not>
+        </preConditions>
+        <comment>作业分类表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_JOB_CAT
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				PARENT_ID            VARCHAR2(60 CHAR),
+				CAT_NAME             VARCHAR2(150 CHAR),
+				CAT_DESC             VARCHAR2(600 CHAR),
+				SORT_NUM             NUMBER,
+				CREATE_USER          VARCHAR2(64 CHAR),
+				CREATE_DATE          DATE,
+				LAST_MODIFIED_USER   VARCHAR2(64 CHAR),
+				LAST_MODIFIED_DATE   DATE,
+				constraint PK_TB_DFDI_JOB_CAT primary key (ID)
+				);
+
+				comment on table TB_DFDI_JOB_CAT is
+				'作业分类表';
+
+				comment on column TB_DFDI_JOB_CAT.ID is
+				'分类ID';
+
+				comment on column TB_DFDI_JOB_CAT.PARENT_ID is
+				'父分类ID';
+
+				comment on column TB_DFDI_JOB_CAT.CAT_NAME is
+				'分类名称';
+
+				comment on column TB_DFDI_JOB_CAT.CAT_DESC is
+				'分类描述';
+
+				comment on column TB_DFDI_JOB_CAT.SORT_NUM is
+				'排序号';
+
+				comment on column TB_DFDI_JOB_CAT.CREATE_USER is
+				'创建人';
+
+				comment on column TB_DFDI_JOB_CAT.CREATE_DATE is
+				'创建时间';
+
+				comment on column TB_DFDI_JOB_CAT.LAST_MODIFIED_USER is
+				'最后一次修改人';
+
+				comment on column TB_DFDI_JOB_CAT.LAST_MODIFIED_DATE is
+				'最后一次修改时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_32" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_LOG"/>
+            </not>
+        </preConditions>
+        <comment>作业日志</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_JOB_LOG
+                (
+                   ID                   VARCHAR2(60 CHAR)    not null,
+                   JOB_ID               VARCHAR2(60 CHAR),
+                   JOB_VERSION          VARCHAR2(60 CHAR),
+                   VECTOR_JSON          CLOB,
+                   OP_TYPE              VARCHAR2(64),
+                   OP_USER              VARCHAR2(64 CHAR),
+                   OP_DATE              DATE,
+                   OP_LOG               CLOB,
+                   constraint PK_TB_DFDI_JOB_LOG primary key (ID)
+                );
+
+                comment on table TB_DFDI_JOB_LOG is
+                '作业日志';
+
+                comment on column TB_DFDI_JOB_LOG.ID is
+                'ID';
+
+                comment on column TB_DFDI_JOB_LOG.JOB_ID is
+                '作业ID';
+
+                comment on column TB_DFDI_JOB_LOG.JOB_VERSION is
+                '版本';
+
+                comment on column TB_DFDI_JOB_LOG.VECTOR_JSON is
+                '矢量图JSON';
+
+                comment on column TB_DFDI_JOB_LOG.OP_TYPE is
+                '操作类型：start——启动，stop——停止，update——修改，创建——create，删除——delete';
+
+                comment on column TB_DFDI_JOB_LOG.OP_USER is
+                '操作人';
+
+                comment on column TB_DFDI_JOB_LOG.OP_DATE is
+                '操作时间';
+
+                comment on column TB_DFDI_JOB_LOG.OP_LOG is
+                '操作日志';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_33" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_SECTION_LOG"/>
+            </not>
+        </preConditions>
+        <comment>作业流日志表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_JOB_SECTION_LOG
+                (
+                   ID                   VARCHAR2(60 CHAR)    not null,
+                   JOB_LOG_ID           VARCHAR(60),
+                   JOB_SECTION_CODE     VARCHAR2(60 CHAR),
+                   STRATEGY_TYPE        VARCHAR2(30 CHAR),
+                   STRATEGY             VARCHAR2(150 CHAR),
+                   DATA_RUNNER          VARCHAR2(15 CHAR),
+                   ETL_JOB_DATA         CLOB,
+                   OP_TYPE              VARCHAR2(64),
+                   OP_USER              VARCHAR2(64 CHAR),
+                   OP_DATE              DATE,
+                   OP_LOG               CLOB,
+                   constraint PK_TB_DFDI_JOB_SECTION_LOG primary key (ID)
+                );
+
+                comment on table TB_DFDI_JOB_SECTION_LOG is
+                '作业流日志表';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.ID is
+                '作业流ID';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.JOB_SECTION_CODE is
+                '作业流编码';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.STRATEGY_TYPE is
+                '读取策略类型：streaming-实时，batch-定时，once-一次性';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.STRATEGY is
+                '读取策略表达式';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.DATA_RUNNER is
+                '运行设备';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.ETL_JOB_DATA is
+                'ETL作业JSON';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.OP_TYPE is
+                '操作类型：start——启动，stop——停止';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.OP_USER is
+                '操作人';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.OP_DATE is
+                '操作时间';
+
+                comment on column TB_DFDI_JOB_SECTION_LOG.OP_LOG is
+                '操作日志';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_34" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FILE_METADATA"/>
+            </not>
+        </preConditions>
+        <comment>文件元数据信息表</comment>
+        <sql>
+            <![CDATA[
+                CREATE TABLE TB_DFDI_FILE_METADATA
+                (
+                  ID             VARCHAR2(60 BYTE)              NOT NULL,
+                  FILE_PATH      VARCHAR2(500 BYTE),
+                  FILE_NAME      VARCHAR2(100 BYTE),
+                  FILE_SUFFIX    VARCHAR2(60 BYTE),
+                  FILE_DESC      VARCHAR2(500 BYTE),
+                  COLUMNS        CLOB,
+                  CREATE_USER    VARCHAR2(64 BYTE),
+                  CREATE_DATE    DATE,
+                  DATALAKE_NAME  VARCHAR2(60 BYTE),
+                  DATALAKE_INFO  CLOB,
+                  FILE_KEYWORD   VARCHAR2(60 BYTE),
+                  FILE_PREFIX   VARCHAR2(200 BYTE),
+                  constraint PK_TB_DFDI_FILE_METADATA primary key (ID)
+                );
+
+                COMMENT ON TABLE TB_DFDI_FILE_METADATA IS '文件的元数据信息';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.FILE_PATH IS '文件路径';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.FILE_NAME IS '文件名';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.FILE_SUFFIX IS '文件名后缀（包含.）';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.FILE_DESC IS '文件描述';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.COLUMNS IS '一个json字符串，存储文件对应的字段信息';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.CREATE_USER IS '创建人';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.CREATE_DATE IS '创建时间';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.DATALAKE_NAME IS '仓库id';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.DATALAKE_INFO IS '一个json字符串，存储必要的仓库信息，包含：仓库id、仓库类型、仓库连接信息等';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.FILE_KEYWORD IS '关键字';
+
+                COMMENT ON COLUMN TB_DFDI_FILE_METADATA.FILE_PREFIX IS '前缀';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_35" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_SCHEDULE"/>
+            </not>
+        </preConditions>
+        <comment>作业调度表</comment>
+        <sql>
+            <![CDATA[
+                CREATE TABLE TB_DFDI_JOB_SCHEDULE
+                (
+                  ID                VARCHAR2(60 BYTE)           NOT NULL,
+                  JOB_ID            VARCHAR2(60 BYTE),
+                  JOB_SECTION_CODE  VARCHAR2(60 BYTE),
+                  CORN              VARCHAR2(60 BYTE),
+                  CREATE_USER       VARCHAR2(30 BYTE),
+                  CREATE_DATE       DATE,
+                  START_TIME        DATE,
+                  STOP_TIME         DATE,
+                  STRATEGY_TYPE     VARCHAR2(20 BYTE),
+                  HAD_START         VARCHAR2(6 BYTE),
+                  constraint PK_TB_DFDI_JOB_SCHEDULE primary key (ID)
+                );
+
+                COMMENT ON TABLE TB_DFDI_JOB_SCHEDULE IS '作业调度表';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.JOB_ID IS '作业id';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.JOB_SECTION_CODE IS 'etl作业名称，即：作业流编码。同时可以作为创建调度时的唯一id';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.CORN IS 'corn表达式';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.CREATE_USER IS '创建人';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.CREATE_DATE IS '创建时间';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.START_TIME IS '调度启动时间';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.STOP_TIME IS '调度结束时间（其实是调度的过期时间，到了此时间后调度需要被删除）';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.STRATEGY_TYPE IS '调度类型。streaming-实时，batch-定时，once-一次性''';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SCHEDULE.HAD_START IS '对应etl作业是否已经被调度启动过，1：已被启动过；0：未被启动过';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_36" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT"/>
+            </not>
+        </preConditions>
+        <comment>作业流快照表</comment>
+        <sql>
+            <![CDATA[
+                CREATE TABLE TB_DFDI_JOB_SECTION_SNAPSHOT
+                (
+                  ID                  VARCHAR2(60 BYTE)         NOT NULL,
+                  JOB_ID              VARCHAR2(60 BYTE),
+                  JOB_SECTION_CODE    VARCHAR2(60 BYTE),
+                  STATE               VARCHAR2(20 BYTE),
+                  CREATE_USER         VARCHAR2(60 BYTE),
+                  CREATE_DATE         DATE,
+                  LAST_MODIFIED_USER  VARCHAR2(60 BYTE),
+                  LAST_MODIFIED_DATE  DATE,
+                  constraint PK_DFDI_JOB_SECTION_SNAPSHOT primary key (ID)
+                );
+
+                COMMENT ON TABLE TB_DFDI_JOB_SECTION_SNAPSHOT IS '作业流快照表';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.JOB_ID IS '作业id';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.JOB_SECTION_CODE IS '作业流编码（etl作业名称）在此表中唯一，一个作业流只保存一条状态快照信息';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.STATE IS '作业流状态';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.CREATE_USER IS '创建人';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.CREATE_DATE IS '创建时间';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.LAST_MODIFIED_USER IS '最后一次修改人';
+
+                COMMENT ON COLUMN TB_DFDI_JOB_SECTION_SNAPSHOT.LAST_MODIFIED_DATE IS '最后一次修改时间';
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_37" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_SECTION_RUNLOG"/>
+            </not>
+        </preConditions>
+        <comment>作业流执行日志表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_JOB_SECTION_RUNLOG
+				(
+				ID                   VARCHAR2(60 CHAR)    not null,
+				JOB_ID               VARCHAR2(60 CHAR),
+				JOB_SECTION_CODE     VARCHAR2(60 CHAR),
+				START_TIME           DATE,
+				STOP_TIME            DATE,
+				LAST_MODIFIED_DATE   DATE,
+				JOB_SECTION_LOG_ID   VARCHAR2(60 CHAR),
+				constraint PK_TB_DFDI_JOB_SECTION_RUNLOG primary key (ID)
+				);
+
+				comment on table TB_DFDI_JOB_SECTION_RUNLOG is
+				'作业流执行日志表';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.ID is
+				'ID';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.JOB_ID is
+				'作业ID';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.JOB_SECTION_CODE is
+				'作业流编码';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.START_TIME is
+				'开始时间';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.STOP_TIME is
+				'结束时间';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.LAST_MODIFIED_DATE is
+				'最后修改时间';
+
+				comment on column TB_DFDI_JOB_SECTION_RUNLOG.JOB_SECTION_LOG_ID is
+				'作业流日志ID';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_38" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FUNCTOR_DICT"/>
+            </not>
+        </preConditions>
+        <comment>算子字典表</comment>
+        <sql>
+            <![CDATA[
+				CREATE TABLE TB_DFDI_FUNCTOR_DICT
+                (
+                  ID                  VARCHAR2(60 BYTE)         NOT NULL,
+                  ORI_DICT_CODE       VARCHAR2(60 BYTE),
+                  ORI_DICT_KEY        VARCHAR2(60 BYTE),
+				  ORI_DICT_VALUE      VARCHAR2(60 BYTE),
+                  DST_DICT_CODE       VARCHAR2(60 BYTE),
+				  DST_DICT_KEY        VARCHAR2(60 BYTE),
+				  DST_DICT_VALUE      VARCHAR2(60 BYTE),
+                  TIMES               NUMBER,
+                  ORI_DICT_BM         VARCHAR2(60 BYTE),
+                  ORI_DICT_MODE       NUMBER,
+				  ORI_DICT_MS         VARCHAR2(60 BYTE),
+                  DST_DICT_BM         VARCHAR2(60 BYTE),
+				  DST_DICT_MODE       NUMBER,
+				  DST_DICT_MS         VARCHAR2(60 BYTE),
+
+                  constraint TB_DFDI_FUNCTOR_DICT primary key (ID)
+                );
+
+                COMMENT ON TABLE TB_DFDI_FUNCTOR_DICT IS '算子字典表';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ORI_DICT_CODE IS '原始字典代码';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ORI_DICT_KEY IS '原始字典字段键值KEY';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ORI_DICT_VALUE IS '原始字典字段键值VALUE';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.DST_DICT_CODE IS '目标字典代码';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.DST_DICT_KEY IS '目标字典字段键值KEY';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.DST_DICT_VALUE IS '目标字典字段键值VALUE';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.TIMES IS '统计次数';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ORI_DICT_BM IS '源编码';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ORI_DICT_MODE IS '源隐射方式';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.ORI_DICT_MS IS '源描述';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.DST_DICT_BM IS '目标编码';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.DST_DICT_MODE IS '目标隐射方式';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_DICT.DST_DICT_MS IS '目标描述';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_39" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_FUNCTOR_STATIC"/>
+            </not>
+        </preConditions>
+        <comment>算子统计表</comment>
+        <sql>
+            <![CDATA[
+				CREATE TABLE TB_DFDI_FUNCTOR_STATIC
+                (
+                  ID                  VARCHAR2(60 BYTE)         NOT NULL,
+                  FUNC_CODE           VARCHAR2(60 BYTE),
+                  FUNC_NAME           VARCHAR2(150 BYTE),
+                  TIMES               NUMBER,
+
+                  constraint TB_DFDI_FUNCTOR_STATIC primary key (ID)
+                );
+
+                COMMENT ON TABLE TB_DFDI_FUNCTOR_STATIC IS '算子统计表';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_STATIC.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_STATIC.FUNC_CODE IS '算子编码';
+
+                COMMENT ON COLUMN TB_DFDI_FUNCTOR_STATIC.FUNC_NAME IS '算子名称';
+
+				COMMENT ON COLUMN TB_DFDI_FUNCTOR_STATIC.TIMES IS '统计次数';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_40" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KAFKA_METADATA"/>
+            </not>
+        </preConditions>
+        <comment>KAFKA元数据信息表</comment>
+        <sql>
+            <![CDATA[
+                CREATE TABLE TB_DFDI_KAFKA_METADATA
+                (
+                  ID             VARCHAR2(60 BYTE)              NOT NULL,
+                  TOPIC_NAME     VARCHAR2(200 BYTE),
+                  COLUMNS        CLOB,
+                  CREATE_USER    VARCHAR2(64 BYTE),
+                  CREATE_DATE    DATE,
+                  DATALAKE_NAME  VARCHAR2(60 BYTE),
+                  DATALAKE_INFO  CLOB,
+                  FILE_KEYWORD   VARCHAR2(60 BYTE),
+                  constraint TB_DFDI_KAFKA_METADATA primary key (ID)
+                );
+                COMMENT ON TABLE TB_DFDI_KAFKA_METADATA IS '文件的元数据信息';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.TOPIC_NAME IS '主题名称';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.COLUMNS IS '一个json字符串，存储文件对应的字段信息';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.CREATE_USER IS '创建人';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.CREATE_DATE IS '创建时间';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.DATALAKE_NAME IS '仓库id';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.DATALAKE_INFO IS '一个json字符串，存储必要的仓库信息，包含：仓库id、仓库类型、仓库连接信息等';
+
+                COMMENT ON COLUMN TB_DFDI_KAFKA_METADATA.FILE_KEYWORD IS '关键字';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_41" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_USED_STATIC"/>
+            </not>
+        </preConditions>
+        <comment>仓库使用记录表</comment>
+        <sql>
+            <![CDATA[
+                CREATE TABLE TB_DFDI_USED_STATIC (
+                    ID VARCHAR2 (60 BYTE) NOT NULL,
+                    DBID VARCHAR2 (60 BYTE),
+                    DBTYPE VARCHAR2 (60 BYTE),
+                    NAME VARCHAR2 (60 BYTE),
+                    TIMES NUMBER,
+                    CONSTRAINT TB_DFDI_USED_STATIC PRIMARY KEY (ID)
+                );
+
+                COMMENT ON TABLE TB_DFDI_USED_STATIC IS '最近使用的仓库记录表';
+
+                COMMENT ON COLUMN TB_DFDI_USED_STATIC.ID IS 'UUID';
+
+                COMMENT ON COLUMN TB_DFDI_USED_STATIC.DBID IS '仓库ID';
+
+                COMMENT ON COLUMN TB_DFDI_USED_STATIC.DBTYPE IS '仓库类型';
+
+                COMMENT ON COLUMN TB_DFDI_USED_STATIC.NAME IS '仓库的表名称或者算子编码';
+
+                COMMENT ON COLUMN TB_DFDI_USED_STATIC.TIMES IS '使用次数';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_STATIC"/>
+            </not>
+        </preConditions>
+        <comment>作业统计表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_STATIC(
+                   ID                   	VARCHAR2(60 CHAR)    not null,
+                   JOB_NAME             	VARCHAR2(200 CHAR),
+                   INOUTLET_NAME        	VARCHAR2(200 CHAR),
+                   TABLE_NAME           	VARCHAR2(60 CHAR),
+                   PROCESS_TIME         	VARCHAR2(60 CHAR),
+                   PROCESS_TIME_DURATION    VARCHAR2(60 CHAR),
+                   INGESTION_TIME           VARCHAR2(60 CHAR),
+                   INGESTION_TIME_DURATION  VARCHAR2(60 CHAR),
+                   EVENT_TIME               VARCHAR2(60 CHAR),
+                   EVENT_TIME_DURATION      VARCHAR2(60 CHAR),
+                   BATCH					VARCHAR2(200 CHAR),
+                   METRIC					VARCHAR2(60 CHAR),
+                   METRIC_VALUE				NUMBER,
+                   CREATE_DATE				TIMESTAMP,
+                   HAS_COUNT				CHAR,
+
+                   constraint PK_TB_DFDI_JOB_STATIC primary key (ID)
+                );
+
+                comment on table TB_DFDI_JOB_STATIC is
+                '作业统计表';
+
+                comment on column TB_DFDI_JOB_STATIC.ID is
+                'ID';
+
+                comment on column TB_DFDI_JOB_STATIC.JOB_NAME is
+                '作业SECTIONCODE名称';
+
+                comment on column TB_DFDI_JOB_STATIC.INOUTLET_NAME is
+                '组件名称(inlet/outlet环节的统计信息，let对应为job中inlet或outlet的名称；自定义统计业务在runlet中实现，let统一为runlet)';
+
+                comment on column TB_DFDI_JOB_STATIC.TABLE_NAME is
+                '记录的资源名称，对应job metadata中的name';
+
+                comment on column TB_DFDI_JOB_STATIC.PROCESS_TIME is
+                '处理时间的开始时间，格式: 开始时间(yyyyMMddHHmmss)';
+
+                comment on column TB_DFDI_JOB_STATIC.PROCESS_TIME_DURATION is
+                '处理窗口时长(秒)';
+
+                comment on column TB_DFDI_JOB_STATIC.INGESTION_TIME is
+                '接入时间的开始时间，格式: 开始时间(yyyyMMddHHmmss)';
+
+                comment on column TB_DFDI_JOB_STATIC.INGESTION_TIME_DURATION is
+                '接入窗口时长(秒)';
+
+                comment on column TB_DFDI_JOB_STATIC.EVENT_TIME is
+                '业务时间的开始时间，格式: 开始时间(yyyyMMddHHmmss)';
+
+                comment on column TB_DFDI_JOB_STATIC.EVENT_TIME_DURATION is
+                '业务窗口时长(秒)';
+
+                comment on column TB_DFDI_JOB_STATIC.BATCH is
+                '批次号';
+
+                comment on column TB_DFDI_JOB_STATIC.METRIC is
+                '统计指标名称,inlet和outlet分别有以下三项固定指标:1)rows：记录条数; 2)rows-valid：有效记录的条数; 3)rows-invalid：无效记录的条数';
+
+                comment on column TB_DFDI_JOB_STATIC.METRIC_VALUE is
+                '统计指标值';
+
+                comment on column TB_DFDI_JOB_STATIC.CREATE_DATE is
+                '创建时间';
+
+                comment on column TB_DFDI_JOB_STATIC.HAS_COUNT is
+                '是否已统计, 0表示未统计,1表示已经统计';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_DEBUG_TABLE"/>
+            </not>
+        </preConditions>
+        <comment>临时目标表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_DEBUG_TABLE
+                (
+                  id          VARCHAR2(60) not null,
+                  job_id      VARCHAR2(60),
+                  resource_id VARCHAR2(60),
+                  db_type     VARCHAR2(60),
+                  table_name  VARCHAR2(60),
+                  create_user VARCHAR2(60),
+                  create_date DATE,
+                  constraint PK_TB_DFDI_DEBUG_TABLE primary key (id)
+                );
+
+                comment on table TB_DFDI_DEBUG_TABLE
+                  is '临时目标表';
+
+                comment on column TB_DFDI_DEBUG_TABLE.id
+                  is '唯一id';
+                comment on column TB_DFDI_DEBUG_TABLE.job_id
+                  is '作业id';
+                comment on column TB_DFDI_DEBUG_TABLE.resource_id
+                  is '仓库id';
+                comment on column TB_DFDI_DEBUG_TABLE.db_type
+                  is '仓库类型';
+                comment on column TB_DFDI_DEBUG_TABLE.table_name
+                  is 'oracle的表名、kafka的topic、file的路径等';
+                comment on column TB_DFDI_DEBUG_TABLE.create_user
+                  is '创建人';
+                comment on column TB_DFDI_DEBUG_TABLE.create_date
+                  is '创建时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_03" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_TABLE_RELATE"/>
+            </not>
+        </preConditions>
+        <comment>作业表关系</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_TABLE_RELATE
+                (
+                  id                   VARCHAR2(60) not null,
+                  job_id               VARCHAR2(60),
+                  source_db_id         VARCHAR2(60),
+                  source_table_name    VARCHAR2(60),
+                  source_table_name_ch VARCHAR2(60),
+                  target_db_id         VARCHAR2(60),
+                  target_table_name    VARCHAR2(60),
+                  target_table_name_ch VARCHAR2(60),
+                  create_user          VARCHAR2(60),
+                  create_date          DATE,
+                  last_modified_user   VARCHAR2(64 CHAR),
+                  last_modified_date   TIMESTAMP(6),
+                  constraint PK_TB_DFDI_JOB_TABLE_RELATE primary key (id)
+                );
+
+                comment on table TB_DFDI_JOB_TABLE_RELATE
+                  is '作业表关系';
+
+                comment on column TB_DFDI_JOB_TABLE_RELATE.id
+                  is '唯一id';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.job_id
+                  is '作业id';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.source_db_id
+                  is '源仓库id';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.source_table_name
+                  is '源表名';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.source_table_name_ch
+                  is '源表中文名';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.target_db_id
+                  is '目标仓库id';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.target_table_name
+                  is '目标表名';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.target_table_name_ch
+                  is '目标表中文名';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.create_user
+                  is '创建人';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.last_modified_user
+                  is '最后一次修改人';
+                comment on column TB_DFDI_JOB_TABLE_RELATE.last_modified_date
+                  is '最后一次修改时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_05" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_DB_KEYWORD"/>
+            </not>
+        </preConditions>
+        <comment>关键字表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_DB_KEYWORD
+                (
+                   ID                   VARCHAR2(60 CHAR)    not null,
+                   ORIGINAL_DB_TYPE     VARCHAR2(60 CHAR),
+                   KEYWORD              VARCHAR2(60 CHAR),
+                   constraint PK_TB_DFDI_DB_KEYWORD primary key (ID)
+                );
+
+				comment on table TB_DFDI_DB_KEYWORD is
+				'数据仓库关键字表';
+
+				comment on column TB_DFDI_DB_KEYWORD.ID is
+				'ID';
+
+				comment on column TB_DFDI_DB_KEYWORD.ORIGINAL_DB_TYPE is
+				'仓库类型（OracleDB,Kdb,localpath,Kafka,MatrixHive,Hdfs,MySql,Postgres,SQLServer,HBase,ElasticSearch）';
+
+				comment on column TB_DFDI_DB_KEYWORD.KEYWORD is
+				'关键字';
+
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_06" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_JOB_MODEL"/>
+            </not>
+        </preConditions>
+        <comment>作业模板表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_JOB_MODEL
+                (
+                   ID                       VARCHAR2(60 CHAR)    not null,
+                   NAME                     VARCHAR2(150 CHAR),
+                   MARK                     VARCHAR2(600 CHAR),
+                   VECTOR_JSON              CLOB,
+                   CREATE_USER              VARCHAR2(64 CHAR),
+                   CREATE_DATE              DATE,
+                   LAST_MODIFIED_USER       VARCHAR2(64 CHAR),
+                   LAST_MODIFIED_DATE       DATE,
+                   USED_TIMES               NUMBER,
+                   constraint PK_TB_DFDI_JOB_MODEL primary key (ID)
+                );
+
+                comment on table TB_DFDI_JOB_MODEL is
+                '作业模板表';
+
+                comment on column TB_DFDI_JOB_MODEL.ID is
+                '作业模板ID';
+
+                comment on column TB_DFDI_JOB_MODEL.NAME is
+                '作业模板名称';
+
+                comment on column TB_DFDI_JOB_MODEL.MARK is
+                '作业模板描述';
+
+                comment on column TB_DFDI_JOB_MODEL.VECTOR_JSON is
+                '矢量图JSON';
+
+                comment on column TB_DFDI_JOB_MODEL.CREATE_USER is
+                '创建人';
+
+                comment on column TB_DFDI_JOB_MODEL.CREATE_DATE is
+                '创建时间';
+
+                comment on column TB_DFDI_JOB_MODEL.LAST_MODIFIED_USER is
+                '最后一次修改人';
+
+                comment on column TB_DFDI_JOB_MODEL.LAST_MODIFIED_DATE is
+                '最后一次修改时间';
+
+                comment on column TB_DFDI_JOB_MODEL.USED_TIMES is
+                '模板使用次数';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_07" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_TABLE_MODEL_MAPPING"/>
+            </not>
+        </preConditions>
+        <comment>表与模板映射关系</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_TABLE_MODEL_MAPPING
+                (
+                   ID                       VARCHAR2(60)    not null,
+                   DB_ID                    VARCHAR2(60),
+                   TABLE_NAME               VARCHAR2(60),
+                   JOB_MODEL_ID             VARCHAR2(60)    not null,
+                   ORIGINAL_DB_TYPE         VARCHAR2(60),
+                   constraint PK_TB_DFDI_TABLE_MODEL_MAPPING primary key (ID)
+                );
+
+                comment on table TB_DFDI_TABLE_MODEL_MAPPING is
+                '表与模板映射关系';
+
+                comment on column TB_DFDI_TABLE_MODEL_MAPPING.ID is
+                '唯一id';
+
+                comment on column TB_DFDI_TABLE_MODEL_MAPPING.DB_ID is
+                '仓库id';
+
+                comment on column TB_DFDI_TABLE_MODEL_MAPPING.TABLE_NAME is
+                '表名称';
+
+                comment on column TB_DFDI_TABLE_MODEL_MAPPING.JOB_MODEL_ID is
+                '作业模板id';
+
+                comment on column TB_DFDI_TABLE_MODEL_MAPPING.ORIGINAL_DB_TYPE is
+                '仓库类型';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_08" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_COLUMN_INFO"/>
+            </not>
+        </preConditions>
+        <comment>字段信息表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_COLUMN_INFO
+                (
+                   ID                   VARCHAR(60)          not null,
+                   DB_ID                VARCHAR(60),
+                   TABLE_NAME           VARCHAR(60),
+                   TABLE_NAME_CH        VARCHAR(60),
+                   TABLE_VERSION        NUMBER,
+                   COLUMN_NAME          VARCHAR(60),
+                   COLUMN_NAME_CH       VARCHAR(60),
+                   COLUMN_TYPE          VARCHAR(20),
+                   COLUMN_LENGTH        NUMBER,
+                   COLUMN_ORDER         NUMBER,
+                   CREATE_USER          VARCHAR(60),
+                   CREATE_DATE          DATE,
+                   constraint PK_TB_DFDI_COLUMN_INFO primary key (ID)
+                );
+
+                comment on table TB_DFDI_COLUMN_INFO is
+                '字段信息';
+
+                comment on column TB_DFDI_COLUMN_INFO.ID is
+                '唯一id';
+
+                comment on column TB_DFDI_COLUMN_INFO.DB_ID is
+                '仓库id';
+
+                comment on column TB_DFDI_COLUMN_INFO.TABLE_NAME is
+                '表名';
+
+                comment on column TB_DFDI_COLUMN_INFO.TABLE_NAME_CH is
+                '表中文名';
+
+                comment on column TB_DFDI_COLUMN_INFO.TABLE_VERSION is
+                '表版本号';
+
+                comment on column TB_DFDI_COLUMN_INFO.COLUMN_NAME is
+                '字段名';
+
+                comment on column TB_DFDI_COLUMN_INFO.COLUMN_NAME_CH is
+                '字段中文名';
+
+                comment on column TB_DFDI_COLUMN_INFO.COLUMN_TYPE is
+                '字段类型';
+
+                comment on column TB_DFDI_COLUMN_INFO.COLUMN_LENGTH is
+                '字段长度';
+
+                comment on column TB_DFDI_COLUMN_INFO.COLUMN_ORDER is
+                '字段顺序';
+
+                comment on column TB_DFDI_COLUMN_INFO.CREATE_USER is
+                '创建人';
+
+                comment on column TB_DFDI_COLUMN_INFO.CREATE_DATE is
+                '创建时间';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_09" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KINSHIP_COLUMN"/>
+            </not>
+        </preConditions>
+        <comment>字段血缘映射关系表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_KINSHIP_COLUMN
+                (
+                   ID                   VARCHAR(60)          not null,
+                   FROM_COLUMN_INFO_ID  VARCHAR(60),
+                   DST_COLUM_INFO_ID    VARCHAR(60),
+                   DETAIL               CLOB,
+                   constraint PK_TB_DFDI_KINSHIP_COLUMN primary key (ID)
+                );
+                comment on table TB_DFDI_KINSHIP_COLUMN is
+                '字段血缘映射关系';
+
+                comment on column TB_DFDI_KINSHIP_COLUMN.ID is
+                '唯一id';
+
+                comment on column TB_DFDI_KINSHIP_COLUMN.FROM_COLUMN_INFO_ID is
+                '源字段id';
+
+                comment on column TB_DFDI_KINSHIP_COLUMN.DST_COLUM_INFO_ID is
+                '目标字段id';
+
+                comment on column TB_DFDI_KINSHIP_COLUMN.DETAIL is
+                '字段血缘映射详情';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_10" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_KINSHIP_VER"/>
+            </not>
+        </preConditions>
+        <comment>数据流血缘版本表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_KINSHIP_VER
+                (
+                   ID                   VARCHAR(60)          not null,
+                   KINSHIP_TYPE         VARCHAR2(10),
+                   VERSION              NUMBER,
+                   FROM_DB_ID           VARCHAR(60),
+                   FROM_TABLE_NAME      VARCHAR(60),
+                   FROM_TABLE_NAME_CH   VARCHAR(60),
+                   FROM_TABLE_VERSION   NUMBER,
+                   DST_DB_ID            VARCHAR(60),
+                   DST_TABLE_NAME       VARCHAR(60),
+                   DST_TABLE_NAME_CH    VARCHAR(60),
+                   DST_TABLE_VERSION    NUMBER,
+                   CREATE_DATE          DATE,
+                   CREATE_USER          VARCHAR(60),
+                   constraint PK_TB_DFDI_KINSHIP_VER primary key (ID)
+                );
+                comment on table TB_DFDI_KINSHIP_VER is
+                '数据流血缘版本';
+
+                comment on column TB_DFDI_KINSHIP_VER.ID is
+                '唯一id';
+
+                comment on column TB_DFDI_KINSHIP_VER.KINSHIP_TYPE is
+                '血缘类型（待扩展）';
+
+                comment on column TB_DFDI_KINSHIP_VER.VERSION is
+                '版本号';
+
+                comment on column TB_DFDI_KINSHIP_VER.FROM_DB_ID is
+                '源表仓库id';
+
+                comment on column TB_DFDI_KINSHIP_VER.FROM_TABLE_NAME is
+                '源表表名';
+
+                comment on column TB_DFDI_KINSHIP_VER.FROM_TABLE_NAME_CH is
+                '源表中文名';
+
+                comment on column TB_DFDI_KINSHIP_VER.FROM_TABLE_VERSION is
+                '源表版本号';
+
+                comment on column TB_DFDI_KINSHIP_VER.DST_DB_ID is
+                '目标仓库id';
+
+                comment on column TB_DFDI_KINSHIP_VER.DST_TABLE_NAME is
+                '目标表表名';
+
+                comment on column TB_DFDI_KINSHIP_VER.DST_TABLE_NAME_CH is
+                '目标表中文名';
+
+                comment on column TB_DFDI_KINSHIP_VER.DST_TABLE_VERSION is
+                '目标表版本号';
+
+                comment on column TB_DFDI_KINSHIP_VER.CREATE_DATE is
+                '创建时间';
+
+                comment on column TB_DFDI_KINSHIP_VER.CREATE_USER is
+                '创建人';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_11" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_RES_VER"/>
+            </not>
+        </preConditions>
+        <comment>数据流血缘版本表</comment>
+        <sql>
+            <![CDATA[
+				create table TB_DFDI_RES_VER
+                (
+                  id            VARCHAR2(60) not null,
+                  db_id         VARCHAR2(60),
+                  table_name    VARCHAR2(60),
+                  table_name_ch VARCHAR2(60),
+                  version       NUMBER,
+                  create_date   DATE,
+                  create_user   VARCHAR2(60),
+                  db_type       VARCHAR2(60),
+                  original_flag CHAR(1),
+                  constraint PK_TB_DFDI_RES_VER primary key (ID)
+                );
+                comment on table TB_DFDI_RES_VER
+                  is '资源版本';
+                comment on column TB_DFDI_RES_VER.id
+                  is '唯一id';
+                comment on column TB_DFDI_RES_VER.db_id
+                  is '仓库id';
+                comment on column TB_DFDI_RES_VER.table_name
+                  is '表名';
+                comment on column TB_DFDI_RES_VER.table_name_ch
+                  is '表中文名';
+                comment on column TB_DFDI_RES_VER.version
+                  is '版本号';
+                comment on column TB_DFDI_RES_VER.create_date
+                  is '创建时间';
+                comment on column TB_DFDI_RES_VER.create_user
+                  is '创建人';
+                comment on column TB_DFDI_RES_VER.db_type
+                  is '仓库类型';
+                comment on column TB_DFDI_RES_VER.original_flag
+                  is '是否是原始表。1：是原始表；0：不是原始表';
+             ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="202001091050_02" author="wuqz">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_SUB_AREA_CONFIG"/>
+            </not>
+        </preConditions>
+        <comment>5G区域流入流出专题配置</comment>
+        <sql>
+            <![CDATA[
+            create table TB_SUB_AREA_CONFIG
+            (
+              id             VARCHAR2(60) default sys_guid() not null,
+              send_type      VARCHAR2(60),
+              period         VARCHAR2(60),
+              longtitude     VARCHAR2(60),
+              latitude       VARCHAR2(60),
+              radius         VARCHAR2(60),
+              in_start_time  DATE,
+              in_end_time    DATE,
+              out_start_time DATE,
+              out_end_time   DATE,
+              create_user    VARCHAR2(60),
+              create_date    DATE default sysdate,
+              constraint PK_TB_SUB_AREA_CONFIG primary key (ID)
+            );
+            comment on table TB_SUB_AREA_CONFIG
+              is '5G区域流入流出专题配置';
+            comment on column TB_SUB_AREA_CONFIG.id
+              is '唯一id';
+            comment on column TB_SUB_AREA_CONFIG.send_type
+              is '递送方式（MESSAGE/SFTP）';
+            comment on column TB_SUB_AREA_CONFIG.period
+              is '周期（单位为天）';
+            comment on column TB_SUB_AREA_CONFIG.longtitude
+              is '经度';
+            comment on column TB_SUB_AREA_CONFIG.latitude
+              is '纬度';
+            comment on column TB_SUB_AREA_CONFIG.radius
+              is '区域半径';
+            comment on column TB_SUB_AREA_CONFIG.in_start_time
+              is '流入起始时间';
+            comment on column TB_SUB_AREA_CONFIG.in_end_time
+              is '流入结束时间';
+            comment on column TB_SUB_AREA_CONFIG.out_start_time
+              is '流出起始时间';
+            comment on column TB_SUB_AREA_CONFIG.out_end_time
+              is '流出结束时间';
+            comment on column TB_SUB_AREA_CONFIG.create_user
+              is '创建人';
+            comment on column TB_SUB_AREA_CONFIG.create_date
+              is '创建时间';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="202001091135_01" author="wuqz">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_SUB_ROAM_CONFIG"/>
+            </not>
+        </preConditions>
+        <comment>5G漫入漫出专题配置</comment>
+        <sql>
+            <![CDATA[
+            create table TB_SUB_ROAM_CONFIG
+            (
+              id             VARCHAR2(60) default sys_guid() not null,
+              send_type      VARCHAR2(60),
+              period         VARCHAR2(60),
+              carrier_ld     VARCHAR2(60),
+              prov           VARCHAR2(60),
+              city           VARCHAR2(60),
+              bd_start_time  DATE,
+              bd_end_time    DATE,
+              create_user    VARCHAR2(60),
+              create_date    DATE default sysdate,
+              constraint PK_TB_SUB_ROAM_CONFIG primary key (ID)
+            );
+            comment on table TB_SUB_ROAM_CONFIG
+              is '5G漫入漫出日表配置';
+            comment on column TB_SUB_ROAM_CONFIG.id
+              is '唯一id';
+            comment on column TB_SUB_ROAM_CONFIG.send_type
+              is '递送方式（MESSAGE/SFTP）';
+            comment on column TB_SUB_ROAM_CONFIG.period
+              is '周期（单位为天）';
+            comment on column TB_SUB_ROAM_CONFIG.carrier_ld
+              is '运营商标识';
+            comment on column TB_SUB_ROAM_CONFIG.prov
+              is '省';
+            comment on column TB_SUB_ROAM_CONFIG.city
+              is '市';
+            comment on column TB_SUB_ROAM_CONFIG.bd_start_time
+              is '数据日期起始时间';
+            comment on column TB_SUB_ROAM_CONFIG.bd_end_time
+              is '数据日期结束时间';
+            comment on column TB_SUB_ROAM_CONFIG.create_user
+              is '创建人';
+            comment on column TB_SUB_ROAM_CONFIG.create_date
+              is '创建时间';
+            ]]>
+        </sql>
+    </changeSet>
+    <!-- 创建表结束 -->
+
+    <!-- 修改表开始 -->
+    <changeSet id="201906262016_42" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW" columnName="INLET_IDS"/>
+            </and>
+        </preConditions>
+        <comment>工作流表删除 INLET_IDS 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW"
+                DROP ( "INLET_IDS" ) ;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_43" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW" columnName="OUTLET_IDS"/>
+            </and>
+        </preConditions>
+        <comment>工作流表删除 OUTLET_IDS 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW"
+                DROP ( "OUTLET_IDS" ) ;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_44" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FLOW" columnName="INLET_CODES"/>
+            </not>
+        </preConditions>
+        <comment>工作流表添加 INLET_CODES 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW"
+                ADD ( "INLET_CODES" VARCHAR2(1500) NULL  ) ;
+                comment on column TB_DFDI_FLOW.INLET_CODES is '读取定义CODES集合';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_45" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FLOW" columnName="OUTLET_CODES"/>
+            </not>
+        </preConditions>
+        <comment>工作流表添加 OUTLET_CODES 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW"
+                ADD ( "OUTLET_CODES" VARCHAR2(1500) NULL  ) ;
+                comment on column TB_DFDI_FLOW.OUTLET_CODES is '入库定义CODES集合';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_46" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="INLET_IDS"/>
+            </and>
+        </preConditions>
+        <comment>工作流历史表删除 INLET_IDS 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW_HIS"
+                DROP ( "INLET_IDS" ) ;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_47" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="OUTLET_IDS"/>
+            </and>
+        </preConditions>
+        <comment>工作流历史表删除 OUTLET_IDS 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW_HIS"
+                DROP ( "OUTLET_IDS" ) ;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_48" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="INLET_CODES"/>
+            </not>
+        </preConditions>
+        <comment>工作流历史表添加 INLET_CODES 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW_HIS"
+                ADD ( "INLET_CODES" VARCHAR2(1500) NULL  ) ;
+                comment on column TB_DFDI_FLOW_HIS.INLET_CODES is '读取定义CODES集合';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_49" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="OUTLET_CODES"/>
+            </not>
+        </preConditions>
+        <comment>工作流历史表添加 OUTLET_CODES 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_FLOW_HIS"
+                ADD ( "OUTLET_CODES" VARCHAR2(1500) NULL  ) ;
+                comment on column TB_DFDI_FLOW_HIS.OUTLET_CODES is '入库定义CODES集合';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_50" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="op_result"/>
+            </not>
+        </preConditions>
+        <comment>作业日志表添加 op_result 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_LOG add op_result varchar2(30);
+                comment on column TB_DFDI_JOB_LOG.op_result is '操作结果，成功或失败。success，fail';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_51" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="op_result"/>
+            </not>
+        </preConditions>
+        <comment>作业流日志表添加 op_result 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG add op_result varchar2(30);
+                comment on column TB_DFDI_JOB_SECTION_LOG.op_result is '操作结果，成功或失败。success，fail';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_52" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB" columnName="STRATEGY_TYPES"/>
+            </not>
+        </preConditions>
+        <comment>工作表添加 STRATEGY_TYPES 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB"
+                ADD ( "STRATEGY_TYPES" VARCHAR2(100) NULL  ) ;
+                comment on column TB_DFDI_JOB.STRATEGY_TYPES is '读取策略集合，多个之间以","分隔。例如：["streaming","batch","once"]';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_53" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="JOB_ID"/>
+            </not>
+        </preConditions>
+        <comment>作业流日志表添加 JOB_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG add JOB_ID varchar2(60);
+                comment on column TB_DFDI_JOB_SECTION_LOG.JOB_ID
+	  is '作业id';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_54" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_USED_STATIC" columnName="CREATE_DATE"/>
+            </not>
+        </preConditions>
+        <comment>最近使用表添加 CREATE_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_USED_STATIC add CREATE_DATE DATE;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906262016_55" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_USED_STATIC" columnName="NODE_JSON"/>
+            </not>
+        </preConditions>
+        <comment>最近使用表添加 NODE_JSON 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_USED_STATIC add NODE_JSON CLOB;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906281030_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="JOB_SECTION_LOG_ID"/>
+            </not>
+        </preConditions>
+        <comment>作业流执行日志表添加 JOB_SECTION_LOG_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_RUNLOG add JOB_SECTION_LOG_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906290950_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="HAD_START"/>
+            </not>
+        </preConditions>
+        <comment>作业流执行日志表添加 JOB_SECTION_LOG_ID 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE add HAD_START VARCHAR2(6 BYTE);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906290950_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_PREFIX"/>
+            </not>
+        </preConditions>
+        <comment>文件元数据信息表添加 FILE_PREFIX 字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA add FILE_PREFIX VARCHAR2(200 BYTE);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_12" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="OP_DATE"/>
+            </and>
+        </preConditions>
+        <comment>作业日志 OP_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_LOG modify OP_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_13" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="OP_DATE"/>
+            </and>
+        </preConditions>
+        <comment>作业流日志 OP_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_LOG modify OP_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_14" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="START_TIME"/>
+            </and>
+        </preConditions>
+        <comment>作业流运行日志 START_TIME 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_RUNLOG modify START_TIME TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_15" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="STOP_TIME"/>
+            </and>
+        </preConditions>
+        <comment>作业流运行日志 STOP_TIME 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_RUNLOG modify STOP_TIME TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_16" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="LAST_MODIFIED_DATE"/>
+            </and>
+        </preConditions>
+        <comment>作业流运行日志 LAST_MODIFIED_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_RUNLOG modify LAST_MODIFIED_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_17" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="CREATE_DATE"/>
+            </and>
+        </preConditions>
+        <comment>作业调度 CREATE_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SCHEDULE modify CREATE_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_18" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="START_TIME"/>
+            </and>
+        </preConditions>
+        <comment>作业调度 START_TIME 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SCHEDULE modify START_TIME TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_19" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="STOP_TIME"/>
+            </and>
+        </preConditions>
+        <comment>作业调度 STOP_TIME 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SCHEDULE modify STOP_TIME TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_20" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="CREATE_DATE"/>
+            </and>
+        </preConditions>
+        <comment>作业流快照表 CREATE_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify CREATE_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_21" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="LAST_MODIFIED_DATE"/>
+            </and>
+        </preConditions>
+        <comment>作业流快照表 LAST_MODIFIED_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify LAST_MODIFIED_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_22" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="START_TIME"/>
+            </and>
+        </preConditions>
+        <comment>工作表 START_TIME 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify START_TIME TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_23" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="STOP_TIME"/>
+            </and>
+        </preConditions>
+        <comment>工作表 STOP_TIME 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify STOP_TIME TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_24" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="VALIDITY_FROM"/>
+            </and>
+        </preConditions>
+        <comment>工作表 VALIDITY_FROM 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify VALIDITY_FROM TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_25" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="VALIDITY_TO"/>
+            </and>
+        </preConditions>
+        <comment>工作表 VALIDITY_TO 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify VALIDITY_TO TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_26" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="DELETE_DATE"/>
+            </and>
+        </preConditions>
+        <comment>工作表 DELETE_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify DELETE_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_27" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="CREATE_DATE"/>
+            </and>
+        </preConditions>
+        <comment>工作表 CREATE_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify CREATE_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_28" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="LAST_MODIFIED_DATE"/>
+            </and>
+        </preConditions>
+        <comment>工作表 LAST_MODIFIED_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB modify LAST_MODIFIED_DATE TIMESTAMP;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="202001101647_01" author="wuqz">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="op_date"/>
+            </and>
+        </preConditions>
+        <comment>作业流日志表 op_date 字段设置默认值</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_LOG modify op_date default sysdate;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="202001101649_01" author="wuqz">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="op_date"/>
+            </and>
+        </preConditions>
+        <comment>作业流日志表 op_date 字段设置默认值</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_LOG modify op_date default sysdate;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="202001201009_01" author="wuqz">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="op_date"/>
+            </and>
+        </preConditions>
+        <comment>作业流日志表 op_date 字段设置默认值</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_LOG modify op_date default current_timestamp;
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="202001201009_02" author="wuqz">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="op_date"/>
+            </and>
+        </preConditions>
+        <comment>作业流日志表 op_date 字段设置默认值</comment>
+        <sql>
+            <![CDATA[
+            alter table TB_DFDI_JOB_SECTION_LOG modify op_date default current_timestamp;
+        ]]>
+        </sql>
+    </changeSet>
+    <!-- 修改表结束 -->
+
+    <!-- 修改表类型开始 -->
+    <changeSet id="201906291040_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_PATH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify FILE_PATH VARCHAR2(600 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_03" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify FILE_NAME VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_04" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_SUFFIX"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify FILE_SUFFIX VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_05" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_DESC"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify FILE_DESC VARCHAR2(600 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_06" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="CREATE_USER"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify CREATE_USER VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_07" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="DATALAKE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify DATALAKE_NAME VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_08" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_KEYWORD"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify FILE_KEYWORD VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_09" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="FILE_PREFIX"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA modify FILE_PREFIX VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_10" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_11" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="JOB_ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify JOB_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_12" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="JOB_SECTION_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify JOB_SECTION_CODE VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_13" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="CORN"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify CORN VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_14" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="CREATE_USER"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify CREATE_USER VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_15" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="STRATEGY_TYPE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify STRATEGY_TYPE VARCHAR2(30 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_16" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SCHEDULE" columnName="HAD_START"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SCHEDULE modify HAD_START CHAR(1 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_17" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_18" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="JOB_ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify JOB_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_19" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="JOB_SECTION_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify JOB_SECTION_CODE VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_20" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="STATE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify STATE VARCHAR2(20 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_21" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="CREATE_USER"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify CREATE_USER VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_22" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="LAST_MODIFIED_USER"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify LAST_MODIFIED_USER VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_23" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_24" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="ORI_DICT_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify ORI_DICT_CODE VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_25" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="ORI_DICT_KEY"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify ORI_DICT_KEY VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_26" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="ORI_DICT_VALUE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify ORI_DICT_VALUE VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_27" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="DST_DICT_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify DST_DICT_CODE VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_28" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="DST_DICT_KEY"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify DST_DICT_KEY VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_29" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="DST_DICT_VALUE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify DST_DICT_VALUE VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_30" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="ORI_DICT_BM"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify ORI_DICT_BM VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_31" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="ORI_DICT_MS"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify ORI_DICT_MS VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_32" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="DST_DICT_BM"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify DST_DICT_BM VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_33" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_DICT" columnName="DST_DICT_MS"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_DICT modify DST_DICT_MS VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_34" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_STATIC" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_STATIC modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_35" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_STATIC" columnName="FUNC_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_STATIC modify FUNC_CODE VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_36" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_STATIC" columnName="FUNC_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_STATIC modify FUNC_NAME VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_37" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KAFKA_METADATA" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KAFKA_METADATA modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_38" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KAFKA_METADATA" columnName="TOPIC_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KAFKA_METADATA modify TOPIC_NAME VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_39" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KAFKA_METADATA" columnName="CREATE_USER"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KAFKA_METADATA modify CREATE_USER VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_40" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KAFKA_METADATA" columnName="DATALAKE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KAFKA_METADATA modify DATALAKE_NAME VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_41" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KAFKA_METADATA" columnName="FILE_KEYWORD"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KAFKA_METADATA modify FILE_KEYWORD VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_42" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_USED_STATIC" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_USED_STATIC modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_43" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_USED_STATIC" columnName="DBID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_USED_STATIC modify DBID VARCHAR2(64 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_44" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_USED_STATIC" columnName="DBTYPE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_USED_STATIC modify DBTYPE VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_45" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_USED_STATIC" columnName="NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_USED_STATIC modify NAME VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_46" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="JOB_SECTION_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG modify JOB_SECTION_CODE VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_47" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="JOB_SECTION_CODE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_RUNLOG modify JOB_SECTION_CODE VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_48" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB" columnName="STRATEGY_TYPES"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB modify STRATEGY_TYPES VARCHAR2(300 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_49" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="JOB_VERSION"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_LOG modify JOB_VERSION VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_50" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="OP_TYPE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_LOG modify OP_TYPE VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_51" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_LOG" columnName="OP_RESULT"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_LOG modify OP_RESULT VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_52" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="JOB_LOG_ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG modify JOB_LOG_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_53" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="OP_TYPE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG modify OP_TYPE VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_54" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="OP_RESULT"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG modify OP_RESULT VARCHAR2(150 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_55" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_LOG" columnName="JOB_ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_LOG modify JOB_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_56" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW" columnName="INLET_CODES"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FLOW modify INLET_CODES VARCHAR2(1500 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_57" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW" columnName="OUTLET_CODES"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FLOW modify OUTLET_CODES VARCHAR2(1500 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_58" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="INLET_CODES"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FLOW_HIS modify INLET_CODES VARCHAR2(1500 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_59" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FLOW_HIS" columnName="OUTLET_CODES"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FLOW_HIS modify OUTLET_CODES VARCHAR2(1500 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_60" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_RUNLOG modify ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_61" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="JOB_ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_RUNLOG modify JOB_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_62" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_RUNLOG" columnName="JOB_SECTION_LOG_ID"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_RUNLOG modify JOB_SECTION_LOG_ID VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201906291040_63" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_SECTION_SNAPSHOT" columnName="STATE"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_SECTION_SNAPSHOT modify STATE VARCHAR2(30 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_29" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_TABLE_RELATE" columnName="LAST_MODIFIED_USER"/>
+            </and>
+        </preConditions>
+        <comment>工作关系表删除 LAST_MODIFIED_USER 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_TABLE_RELATE"
+                DROP ( "LAST_MODIFIED_USER" ) ;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_30" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_TABLE_RELATE" columnName="LAST_MODIFIED_DATE"/>
+            </and>
+        </preConditions>
+        <comment>工作关系表删除 LAST_MODIFIED_DATE 字段</comment>
+        <sql>
+            <![CDATA[
+                ALTER TABLE "TB_DFDI_JOB_TABLE_RELATE"
+                DROP ( "LAST_MODIFIED_DATE" ) ;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_31" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_JOB_STATIC" columnName="HAS_QA_COUNT"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_STATIC ADD HAS_QA_COUNT VARCHAR2(1 CHAR) DEFAULT '0';
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_32" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_TABLE_MODEL_MAPPING" columnName="OUTLET_CODE"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_TABLE_MODEL_MAPPING ADD OUTLET_CODE VARCHAR2(60 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_33" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_COLUMN" columnName="KINSHIP_VER_ID"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_COLUMN ADD KINSHIP_VER_ID VARCHAR2(60);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_34" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_COLUMN" columnName="FROM_COLUMN_NAME"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_COLUMN ADD FROM_COLUMN_NAME VARCHAR2(60);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_35" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_COLUMN" columnName="DST_COLUMN_NAME"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_COLUMN ADD DST_COLUMN_NAME VARCHAR2(60);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_36" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="FROM_DB_TYPE"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER ADD FROM_DB_TYPE VARCHAR2(60);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_37" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="DST_DB_TYPE"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER ADD DST_DB_TYPE VARCHAR2(60);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_38" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="FROM_ORIGINAL_FLAG"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER ADD FROM_ORIGINAL_FLAG CHAR(1);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280945_39" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="DST_ORIGINAL_FLAG"/>
+            </not>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER ADD DST_ORIGINAL_FLAG CHAR(1);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="201911280930_40" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_RES_VER" columnName="TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_RES_VER modify TABLE_NAME_CH VARCHAR2(300);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="di_202003251400_03" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_DB_KEYWORD" columnName="id"/>
+            </and>
+            <and>
+                <columnExists tableName="TB_DFDI_DB_KEYWORD" columnName="original_db_type"/>
+            </and>
+            <and>
+                <columnExists tableName="TB_DFDI_DB_KEYWORD" columnName="keyword"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_DB_KEYWORD modify id VARCHAR2(60);
+                alter table TB_DFDI_DB_KEYWORD modify original_db_type VARCHAR2(60);
+                alter table TB_DFDI_DB_KEYWORD modify keyword VARCHAR2(60);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="di_202003251400_01" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_STATIC" columnName="has_qa_count"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_STATIC modify has_qa_count CHAR(1) default 0;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="di_202003251400_02" author="chenwq">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_TABLE_MODEL_MAPPING" columnName="outlet_code"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_TABLE_MODEL_MAPPING modify outlet_code VARCHAR2(100 CHAR);
+            ]]>
+        </sql>
+    </changeSet>
+    <!-- 修改表类型结束 -->
+
+    <!-- 存储过程 start -->
+    <changeSet id="202001091800_01" author="lengwh">
+        <comment>新建各个指标初始化存储过程</comment>
+        <createProcedure path="liquibase/sqlfile/push_fetch_code.sql"></createProcedure>
+        <createProcedure path="liquibase/sqlfile/push_load_code.sql"></createProcedure>
+        <createProcedure path="liquibase/sqlfile/push_quality_code.sql"></createProcedure>
+    </changeSet>
+    <!-- 存储过程 end -->
+
+    <changeSet id="202001101522_01" author="lengwh">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_DB_KEYWORD" columnName="KEYWORD_ALIAS"/>
+            </not>
+        </preConditions>
+        <comment>TB_DFDI_DB_KEYWORD表新增字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_DB_KEYWORD ADD KEYWORD_ALIAS VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_01" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_TABLE_RELATE" columnName="SOURCE_TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_TABLE_RELATE modify SOURCE_TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_02" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_TABLE_RELATE" columnName="SOURCE_TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_TABLE_RELATE modify SOURCE_TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_03" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_TABLE_RELATE" columnName="TARGET_TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_TABLE_RELATE modify TARGET_TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_04" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_TABLE_RELATE" columnName="TARGET_TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_TABLE_RELATE modify TARGET_TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_05" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_JOB_STATIC" columnName="TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_JOB_STATIC modify TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_06" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_DEBUG_TABLE" columnName="TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_DEBUG_TABLE modify TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_07" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_TABLE_MODEL_MAPPING" columnName="TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_TABLE_MODEL_MAPPING modify TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_08" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_COLUMN_INFO" columnName="TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_COLUMN_INFO modify TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_09" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_COLUMN_INFO" columnName="TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_COLUMN_INFO modify TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_10" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_COLUMN_INFO" columnName="TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_COLUMN_INFO modify TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_11" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="FROM_TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER modify FROM_TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_12" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="FROM_TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER modify FROM_TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_13" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="DST_TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER modify DST_TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_14" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_KINSHIP_VER" columnName="DST_TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_KINSHIP_VER modify DST_TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_15" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_RES_VER" columnName="TABLE_NAME"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_RES_VER modify TABLE_NAME VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202003191719_16" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_RES_VER" columnName="TABLE_NAME_CH"/>
+            </and>
+        </preConditions>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_RES_VER modify TABLE_NAME_CH VARCHAR2(100);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202004241648_01" author="lvdd">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <not>
+                    <columnExists tableName="TB_DFDI_JOB" columnName="JOB_TYPE"/>
+                </not>
+            </and>
+        </preConditions>
+        <comment>作业表添加JOB_TYPE字段</comment>
+       <sql>
+        <![CDATA[
+                alter table TB_DFDI_JOB ADD JOB_TYPE CHAR(1) default '0';
+                comment on column TB_DFDI_JOB.JOB_TYPE is '作业类型:0处理作业,1脚本作业';
+         ]]>
+    </sql>
+    </changeSet>
+
+    <changeSet id="201907271200_01" author="gaok">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <tableExists tableName="TB_DFDI_CUSTOM_FUNCTOR" />
+            </not>
+        </preConditions>
+        <comment>创建自定义算子表</comment>
+        <sql>
+            <![CDATA[
+                create table TB_DFDI_CUSTOM_FUNCTOR
+                (
+                  func_code   VARCHAR2(50) not null,
+                  create_date DATE,
+                  create_user VARCHAR2(20),
+                  func_script CLOB,
+                  update_user VARCHAR2(20),
+                  update_date DATE
+                )
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="201906081200_03" author="gaok">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_COLUMN_INFO" columnName="COLUMN_NAME_CH"/>
+            </and>
+        </preConditions>
+        <comment>更改COLUMN_NAME_CH字段长度</comment>
+        <sql>
+            <![CDATA[
+                alter  table TB_DFDI_COLUMN_INFO modify COLUMN_NAME_CH varchar2(128)
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007171016_01" author="liby">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="SJXJBM"/>
+            </not>
+        </preConditions>
+        <comment>文件关键字表添加SJXJBM字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA add SJXJBM VARCHAR2(100 CHAR);
+                comment on column TB_DFDI_FILE_METADATA.SJXJBM is '数据项集编码';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007171016_02" author="liby">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <not>
+                <columnExists tableName="TB_DFDI_FILE_METADATA" columnName="VERSION_CODE"/>
+            </not>
+        </preConditions>
+        <comment>文件关键字表添加VERSION_CODE字段</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FILE_METADATA add VERSION_CODE VARCHAR2(100 CHAR);
+                comment on column TB_DFDI_FILE_METADATA.VERSION_CODE is '数据项集版本';
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007211520_01" author="liby">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR" columnName="IN_COLUMNS"/>
+            </and>
+        </preConditions>
+        <comment>算子表修改字段IN_COLUMNS长度</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR modify IN_COLUMNS VARCHAR2(1000);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007211520_02" author="liby">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR" columnName="OUT_COLUMNS"/>
+            </and>
+        </preConditions>
+        <comment>算子表修改字段OUT_COLUMNS长度</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR modify OUT_COLUMNS VARCHAR2(1000);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007221020_01" author="liby">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_HIS" columnName="IN_COLUMNS"/>
+            </and>
+        </preConditions>
+        <comment>算子历史表修改字段IN_COLUMNS长度</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_HIS modify IN_COLUMNS VARCHAR2(1000);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007221020_02" author="liby">
+        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+            <and>
+                <columnExists tableName="TB_DFDI_FUNCTOR_HIS" columnName="OUT_COLUMNS"/>
+            </and>
+        </preConditions>
+        <comment>算子历史表修改字段OUT_COLUMNS长度</comment>
+        <sql>
+            <![CDATA[
+                alter table TB_DFDI_FUNCTOR_HIS modify OUT_COLUMNS VARCHAR2(1000);
+            ]]>
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
